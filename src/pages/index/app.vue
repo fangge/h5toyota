@@ -31,6 +31,7 @@
 
 <script>
     import html2canvas from 'html2canvas';
+    import Canvas2Image from '../../assets/canvas2image';
     import qa1 from '../../components/qa1/qa';
     import qa2 from '../../components/qa2/qa';
     import qa3 from '../../components/qa3/qa';
