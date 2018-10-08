@@ -18,7 +18,7 @@
             <div v-else>嘿嘿，你个老司机 !别什么BUG不BUG，我瞧对你来说都是小咖。别搞那一套天生强大，我知道你背后闷骚努力，就猥琐着浪吧。
                 给你比心，C位出道的机会来了！
             </div>
-            <a>分享测试结果</a><a>进入无忧计划</a>
+            <a @click="resultImg">分享测试结果</a><a href="https://www.gac-toyota.com.cn/vehicles/newlevin%20hev ">进入无忧计划</a>
         </div>
         <div v-else>
             <qa1 v-if="step === 1" @stepNext="stepNext" @setAnswer="setAnswer"></qa1>
@@ -30,6 +30,7 @@
 </template>
 
 <script>
+    import html2canvas from 'html2canvas';
     import qa1 from '../../components/qa1/qa';
     import qa2 from '../../components/qa2/qa';
     import qa3 from '../../components/qa3/qa';
@@ -49,7 +50,6 @@
             }
         },
         created(){
-
 
         },
         methods:{
@@ -93,6 +93,11 @@
             },
             setAnswer(data){
                 this.answers.push(data);
+            },
+            resultImg(){
+                html2canvas(document.body).then(canvas => {
+                    document.body.appendChild(canvas)
+                });
             }
         }
     }

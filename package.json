@@ -8,6 +8,7 @@
     "build": "webpack --mode production --progress --config build/webpack.prod.conf.js"
   },
   "dependencies": {
+    "html2canvas": "^1.0.0-alpha.12",
     "npm": "^6.3.0",
     "vue": "^2.5.16"
   },
