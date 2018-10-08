@@ -1,37 +1,47 @@
 <template>
     <div class="wrap">
-        <div class="input-wrap" v-if="step===0">
-            <input type="text" placeholder="输入你的姓名" v-model="username">
-            <a @click="stepNext">测测你能承受多少Pa</a>
-        </div>
-        <div v-if="resultShow">
-            你是一个能承受{{score}}帕BUG的人
-            <div v-if="score>=1 && score <=25">你可能还没理解什么叫BUG，但我很佩服你越BUG越不怕的精神，继续跌倒吧朋友，摔瘸了总会有站不起来的那天，嘻嘻。
+        <loadbar @loadSuccess="loadSuccess" :isOk="isOk"></loadbar>
+        <div v-if="isOk" class="cont">
+            <div class="index">
+                <i class="key"></i>
+                <div class="input-wrap" v-if="step===0">
+                    <input type="text" placeholder="输入你的姓名" v-model="username">
+                    <a @click="stepNext">测测你能承受多少Pa</a>
+                </div>
             </div>
-            <div v-else-if="score>=26 && score <=50">差点及格？那还是不及格啊！
-                不用风中凌乱了，那依然解救不了你脆弱的心灵。
-                有时候BUG就是一副解药，啃两口吞下去，睡一觉第二天醒来你依然是个王者。
+
+            <div v-if="resultShow" class="resultPage">
+                你是一个能承受{{score}}帕BUG的人
+                <div v-if="score>=1 && score <=25">你可能还没理解什么叫BUG，但我很佩服你越BUG越不怕的精神，继续跌倒吧朋友，摔瘸了总会有站不起来的那天，嘻嘻。
+                </div>
+                <div v-else-if="score>=26 && score <=50">差点及格？那还是不及格啊！
+                    不用风中凌乱了，那依然解救不了你脆弱的心灵。
+                    有时候BUG就是一副解药，啃两口吞下去，睡一觉第二天醒来你依然是个王者。
+                </div>
+                <div v-else-if="score>=51 && score <=75">二货，就算你抗压能力强，能熬夜吃苦，就要死扛吗？
+                    正确的办法是——找个TA护航，偶尔听听一诺一生的情话，偶尔踩踩BUG，打怪升级才快啊！
+                </div>
+                <div v-else>嘿嘿，你个老司机 !别什么BUG不BUG，我瞧对你来说都是小咖。别搞那一套天生强大，我知道你背后闷骚努力，就猥琐着浪吧。
+                    给你比心，C位出道的机会来了！
+                </div>
+                <a @click="resultImg">分享测试结果</a><a href="https://www.gac-toyota.com.cn/vehicles/newlevin%20hev ">进入无忧计划</a>
             </div>
-            <div v-else-if="score>=51 && score <=75">二货，就算你抗压能力强，能熬夜吃苦，就要死扛吗？
-                正确的办法是——找个TA护航，偶尔听听一诺一生的情话，偶尔踩踩BUG，打怪升级才快啊！
+            <div v-else class="qaPage">
+                <qa1 v-if="step === 1" @stepNext="stepNext" @setAnswer="setAnswer"></qa1>
+                <qa2 v-if="step === 2" @stepNext="stepNext" @setAnswer="setAnswer"></qa2>
+                <qa3 v-if="step === 3" @stepNext="stepNext" @setAnswer="setAnswer"></qa3>
+                <qa4 v-if="step === 4" @stepNext="stepNext" @setAnswer="setAnswer" @resultPage="resultPage"></qa4>
             </div>
-            <div v-else>嘿嘿，你个老司机 !别什么BUG不BUG，我瞧对你来说都是小咖。别搞那一套天生强大，我知道你背后闷骚努力，就猥琐着浪吧。
-                给你比心，C位出道的机会来了！
-            </div>
-            <a @click="resultImg">分享测试结果</a><a href="https://www.gac-toyota.com.cn/vehicles/newlevin%20hev ">进入无忧计划</a>
-        </div>
-        <div v-else>
-            <qa1 v-if="step === 1" @stepNext="stepNext" @setAnswer="setAnswer"></qa1>
-            <qa2 v-if="step === 2" @stepNext="stepNext" @setAnswer="setAnswer"></qa2>
-            <qa3 v-if="step === 3" @stepNext="stepNext" @setAnswer="setAnswer"></qa3>
-            <qa4 v-if="step === 4" @stepNext="stepNext" @setAnswer="setAnswer" @resultPage="resultPage"></qa4>
-        </div>
+
+    </div>
+
     </div>
 </template>
 
 <script>
     import html2canvas from 'html2canvas';
     import Canvas2Image from '../../assets/canvas2image';
+    import loadbar from '../../components/processbar/progress-bar';
     import qa1 from '../../components/qa1/qa';
     import qa2 from '../../components/qa2/qa';
     import qa3 from '../../components/qa3/qa';
@@ -39,10 +49,12 @@
 
     export default {
         components: {
-            qa1,qa2,qa3,qa4
+            loadbar,qa1,qa2,qa3,qa4
         },
         data () {
             return {
+                isOk: false, // 是否显示进度条
+                val: 0, // 进度
                 step:0,
                 username:'',
                 resultShow:false,
@@ -50,8 +62,10 @@
                 score:0
             }
         },
-        created(){
-
+        mounted(){
+            setTimeout(()=> {
+                this.isOk = true;
+            },600)
         },
         methods:{
             stepNext(){
@@ -99,6 +113,9 @@
                 html2canvas(document.body).then(canvas => {
                     document.body.appendChild(canvas)
                 });
+            },
+            loadSuccess(){
+                console.log('fuck');
             }
         }
     }
@@ -168,7 +185,7 @@
         border-spacing: 0;
     }
     html,body {
-        font-family: PingFangSC-Medium, "Source Han Sans CN", sans-serif;
+        font-family:'pinghei';
         background: transparent;
     }
 
@@ -233,4 +250,37 @@
             border:1px solid #000;
         }
     }
+    body,html,.wrap,.cont{
+        height: 100%;
+    }
+    .index{
+        height: 100%;
+        background: #c1c1c1 url(bg.jpg) no-repeat center 0;
+        background-size:cover;
+    }
+    .key{
+        display: block;
+        width: rpx(65);
+        height: rpx(125);
+        background: url(key.png) no-repeat;
+        -webkit-background-size: 100%;
+        background-size: 100%;
+        position: absolute;
+        left: 63%;
+        top: 49%;
+        transform: translate3d(-50%,-50%,0) rotate(0deg);
+        transform-origin: top right;
+        animation: keyrotate 1s linear infinite;
+    }
+    @-webkit-keyframes keyrotate{
+        0%{  transform: translate3d(-50%,-50%,0) rotate(0deg);  }
+    16.7%{  transform: translate3d(-55%,-41%,0) rotate(60deg); }
+        33.4%{  transform: translate3d(-77%, -36%, 0) rotate(120deg)  }
+        50.1%{ transform: translate3d(-103%, -50%, 0) rotate(180deg) }
+        66.8%{  transform: translate3d(-94%, -63%, 0) rotate(240deg) }
+        83.5%{  transform: translate3d(-69%, -66%, 0) rotate(300deg) }
+        100%{  transform: translate3d(-50%,-50%,0) rotate(360deg);  }
+    }
+
+
 </style>
