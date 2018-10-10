@@ -90,7 +90,7 @@
         top: 0;
         height: 6px;
         width: 0;
-        background-color :#fff;
+        background-color :#c2c2c2;
     }
     .fade {
     &-enter-active, &-leave-active {

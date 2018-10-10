@@ -2,12 +2,15 @@
     <div class="wrap">
         <loadbar @loadSuccess="loadSuccess" :isOk="isOk"></loadbar>
         <div v-if="isOk" class="cont">
-            <div class="index">
+            <div class="index" v-if="step == 0">
                 <i class="key"></i>
-                <div class="input-wrap" v-if="step===0">
+                <div class="input-wrap animated" v-if="step===0">
                     <input type="text" placeholder="输入你的姓名" v-model="username">
                     <a @click="stepNext">测测你能承受多少Pa</a>
+                    <i class="hand" id="hand1"></i>
                 </div>
+                <i class="animated qp qp1"></i><i class="animated qp qp2"></i><i class="animated qp qp3"></i><i
+                    class="animated qp qp4"></i>
             </div>
 
             <div v-if="resultShow" class="resultPage">
@@ -24,7 +27,8 @@
                 <div v-else>嘿嘿，你个老司机 !别什么BUG不BUG，我瞧对你来说都是小咖。别搞那一套天生强大，我知道你背后闷骚努力，就猥琐着浪吧。
                     给你比心，C位出道的机会来了！
                 </div>
-                <a @click="resultImg">分享测试结果</a><a href="https://www.gac-toyota.com.cn/vehicles/newlevin%20hev ">进入无忧计划</a>
+                <a @click="resultImg">分享测试结果</a><a
+                    href="https://www.gac-toyota.com.cn/vehicles/newlevin%20hev ">进入无忧计划</a>
             </div>
             <div v-else class="qaPage">
                 <qa1 v-if="step === 1" @stepNext="stepNext" @setAnswer="setAnswer"></qa1>
@@ -33,7 +37,7 @@
                 <qa4 v-if="step === 4" @stepNext="stepNext" @setAnswer="setAnswer" @resultPage="resultPage"></qa4>
             </div>
 
-    </div>
+        </div>
 
     </div>
 </template>
@@ -49,73 +53,88 @@
 
     export default {
         components: {
-            loadbar,qa1,qa2,qa3,qa4
+            loadbar, qa1, qa2, qa3, qa4
         },
-        data () {
+        data() {
             return {
                 isOk: false, // 是否显示进度条
-                val: 0, // 进度
-                step:0,
-                username:'',
-                resultShow:false,
-                answers:[],
-                score:0
+                step: 1,
+                username: '',
+                resultShow: false,
+                answers: [],
+                score: 0
             }
         },
-        mounted(){
-            setTimeout(()=> {
+        mounted() {
+            setTimeout(() => {
                 this.isOk = true;
-            },600)
+            }, 1000)
         },
-        methods:{
-            stepNext(){
-                if(this.username){
-                    this.step++;
-                }else{
-                    alert('请输入你的名字')
+        methods: {
+            stepNext() {
+                this.step++;
+                // if (this.username) {
+                //     this.step++;
+                // } else {
+                //     alert('请输入你的名字')
+                // }
+            },
+            resultPage() {
+                this.resultShow = true;
+                let alen = 0;
+                for (let i in this.answers) {
+                    if (this.answers[i] === 'A') {
+                        alen++;
+                    }
+                }
+                if (alen === 1) {
+                    this.score = this.randomNum(1, 25)
+                } else if (alen === 2) {
+                    this.score = this.randomNum(26, 50)
+                } else if (alen === 3) {
+                    this.score = this.randomNum(51, 75)
+                } else if (alen === 4) {
+                    this.score = this.randomNum(76, 100)
                 }
             },
-            resultPage(){
-              this.resultShow = true;
-              let alen = 0;
-              for(let i in this.answers){
-                  if(this.answers[i] === 'A'){
-                      alen++;
-                  }
-              }
-              if(alen ===1){
-                  this.score = this.randomNum(1,25)
-              }else if(alen ===2){
-                  this.score = this.randomNum(26,50)
-              }else if(alen ===3){
-                  this.score = this.randomNum(51,75)
-              }else if(alen ===4){
-                  this.score = this.randomNum(76,100)
-              }
-            },
-            randomNum(minNum,maxNum){
-                switch(arguments.length){
+            randomNum(minNum, maxNum) {
+                switch (arguments.length) {
                     case 1:
-                        return parseInt(Math.random()*minNum+1,10);
+                        return parseInt(Math.random() * minNum + 1, 10);
                         break;
                     case 2:
-                        return parseInt(Math.random()*(maxNum-minNum+1)+minNum,10);
+                        return parseInt(Math.random() * (maxNum - minNum + 1) + minNum, 10);
                         break;
                     default:
                         return 0;
                         break;
                 }
             },
-            setAnswer(data){
+            setAnswer(data) {
                 this.answers.push(data);
             },
-            resultImg(){
+            resultImg() {
                 html2canvas(document.body).then(canvas => {
                     document.body.appendChild(canvas)
                 });
             },
-            loadSuccess(){
-                console.log('fuck');
+            loadSuccess() {
+                this.isOk = true;
+            }
+        },
+        watch:{
+            username:function(val){
+                let timer = null;
+                if(val.length>0){
+                    clearTimeout(timer);
+                    if(this.step == 0){
+                        timer = setTimeout(function () {
+                            document.getElementById('hand1').className += ' show';
+                        },5000)
+                    }
+                }else{
+                    clearTimeout(timer);
+                }
             }
         }
     }
@@ -123,22 +142,31 @@
 </script>
 
 <style lang="scss">
+    @mixin ani($name,$time,$delay){
+        animation-name:$name;
+        animation-delay: $delay;
+        animation-duration:$time!important;
+        animation-timing-function: linear;
+    }
+    $psdBaseSize: 750;
+    $maxBaseSize: 540;
 
-    $psdBaseSize:750;
-    $maxBaseSize:540;
-
-    @function rpx($value){
+    @function rpx($value) {
         @return $value / $psdBaseSize * 10rem;
     }
 
-    html{
-        font-size:10vw;
+    html {
+        font-size: 10vw;
     }
+
     /**
    * Eric Meyer's Reset CSS v2.0 (http://meyerweb.com/eric/tools/css/reset/)
    * http://cssreset.com
    */
-    body * { max-height: 999999px; }
+    body * {
+        max-height: 999999px;
+    }
+
     html, body, div, span, applet, object, iframe,
     h1, h2, h3, h4, h5, h6, p, blockquote, pre,
     a, abbr, acronym, address, big, cite, code,
@@ -158,7 +186,7 @@
         font-weight: normal;
         font-style: normal;
         appearance: none;
-        -webkit-tap-highlight-color: rgba(0,0,0,0);
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     }
 
     /* HTML5 display-role reset for older browsers */
@@ -184,8 +212,9 @@
         border-collapse: collapse;
         border-spacing: 0;
     }
-    html,body {
-        font-family:'pinghei';
+
+    html, body {
+        font-family: 'pinghei';
         background: transparent;
     }
 
@@ -233,32 +262,126 @@
         height: 100%;
         position: relative;
     }
-    .wrap{
+
+    .wrap {
         position: relative;
         overflow: hidden;
     }
-    .input-wrap{
+
+    .input-wrap {
+        width: rpx(701);
+        height: rpx(307);
+        background: url(input_wrap.png) no-repeat;
+        background-size:100% 100%;
         position: fixed;
-        left:50%;
-        top:50%;
-        transform: translate(-50%,-50%);
-        input{
-            width: rpx(360);
-            height: rpx(40);
+        left: 50%;
+        top: 70%;
+        transform: translate(-50%, -50%);
+        box-sizing: border-box;
+        padding-top:rpx(22);
+        @include ani(fadeIn,.2s,1s);
+        input {
+            display: block;
+            width: rpx(651);
+            height: rpx(126);
             line-height: rpx(40);
             text-align: center;
-            border:1px solid #000;
+            border: 0;
+            background: transparent url(input.png) no-repeat;
+            background-size:100% 100%;
+            margin: 0 auto;
+            font-size:rpx(45);
+            font-weight: 600;
+            color: #000;
+            font-family: 'pinghei';
+            &::placeholder{
+                color: #a2a2a2;
+            }
+        }
+        a{
+            display: block;
+            width: rpx(650);
+            height: rpx(122);
+            line-height: rpx(122);
+            background: transparent url(btn.png) no-repeat;
+            background-size:100% 100%;
+            margin: rpx(16) auto 0;
+            color: #000;
+            font-size: rpx(38);
+            text-align: center;
+            font-weight: 600;
+        }
+        .hand{
+            right:rpx(-5);
+            bottom:rpx(-5)
         }
     }
-    body,html,.wrap,.cont{
+
+    body, html, .wrap, .cont {
         height: 100%;
     }
-    .index{
+
+    .index {
         height: 100%;
         background: #c1c1c1 url(bg.jpg) no-repeat center 0;
-        background-size:cover;
+        background-size: cover;
+        i.qp {
+            display: block;
+            position: absolute;
+            background-size: 100% 100%;
+            left:50%;
+            top:50%;
+            z-index: 10;
+            &.qp1 {
+                width: rpx(105);
+                height: rpx(217);
+                background-image: url(qp1.png);
+                margin-left:rpx(-262);
+                margin-top:rpx(-108);
+                @include ani(fadeIn,.5s,0);
+            }
+            &.qp2 {
+                width: rpx(108);
+                height: rpx(257);
+                background-image: url(qp2.png);
+                margin-left:rpx(-332);
+                margin-top:rpx(-328);
+                @include ani(fadeIn,.5s,.2s);
+            }
+            &.qp3 {
+                width: rpx(102);
+                height: rpx(233);
+                background-image: url(qp3.png);
+                margin-left:rpx(232);
+                margin-top:rpx(-288);
+                @include ani(fadeIn,.5s,.4s);
+            }
+            &.qp4 {
+                width: rpx(94);
+                height: rpx(167);
+                background-image: url(qp4.png);
+                margin-left:rpx(92);
+                margin-top:rpx(-278);
+                @include ani(fadeIn,.5s,.6s);
+            }
+        }
+
     }
-    .key{
+    .hand{
+        display: block;
+        width: rpx(102);
+        height:rpx(119);
+        background: url(hand.png) no-repeat;
+        background-size:100% 100%;
+        position: absolute;
+        opacity: 0;
+        transition: all .5s;
+        &.show{
+            opacity: 1;
+        }
+    }
+
+    .key {
         display: block;
         width: rpx(65);
         height: rpx(125);
@@ -268,18 +391,33 @@
         position: absolute;
         left: 63%;
         top: 49%;
-        transform: translate3d(-50%,-50%,0) rotate(0deg);
+        transform: translate3d(-50%, -50%, 0) rotate(0deg);
         transform-origin: top right;
         animation: keyrotate 1s linear infinite;
     }
-    @-webkit-keyframes keyrotate{
-        0%{  transform: translate3d(-50%,-50%,0) rotate(0deg);  }
-    16.7%{  transform: translate3d(-55%,-41%,0) rotate(60deg); }
-        33.4%{  transform: translate3d(-77%, -36%, 0) rotate(120deg)  }
-        50.1%{ transform: translate3d(-103%, -50%, 0) rotate(180deg) }
-        66.8%{  transform: translate3d(-94%, -63%, 0) rotate(240deg) }
-        83.5%{  transform: translate3d(-69%, -66%, 0) rotate(300deg) }
-        100%{  transform: translate3d(-50%,-50%,0) rotate(360deg);  }
+
+    @-webkit-keyframes keyrotate {
+        0% {
+            transform: translate3d(-50%, -50%, 0) rotate(0deg);
+        }
+        16.7% {
+            transform: translate3d(-55%, -41%, 0) rotate(60deg);
+        }
+        33.4% {
+            transform: translate3d(-77%, -36%, 0) rotate(120deg)
+        }
+        50.1% {
+            transform: translate3d(-103%, -50%, 0) rotate(180deg)
+        }
+        66.8% {
+            transform: translate3d(-94%, -63%, 0) rotate(240deg)
+        }
+        83.5% {
+            transform: translate3d(-69%, -66%, 0) rotate(300deg)
+        }
+        100% {
+            transform: translate3d(-50%, -50%, 0) rotate(360deg);
+        }
     }
 
 

@@ -3,6 +3,7 @@ import Vue from 'vue'
 import App from './app.vue'
 import wxApi from '../../assets/wxapi';
 import '../../font/zt.css';
+import '../../assets/animate.css';
 wxApi.shareToPYQ.opts = wxApi.sendToPY.opts = {
     img_url:'',
     link:location.href,
