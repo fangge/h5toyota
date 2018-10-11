@@ -3,7 +3,7 @@
         <div v-if="qaIndex">
             <div class="ani-wrap">
                 <div class="g"></div>
-
+                <!--<div class="m" style="animation:none"></div>-->
                 <div class="m"></div>
                 <i class="qp"></i>
                 <i class="key2"></i>
@@ -113,8 +113,6 @@
                 right: rpx(46);
                 bottom: rpx(10);
                 transition: none;
-
-
                 animation: m .2s 3s linear forwards;
 
             }
@@ -161,8 +159,8 @@
             }
             100% {
                 height: rpx(385);
-                right: rpx(47);
-                bottom: rpx(3);
+                right: rpx(46);
+                bottom: rpx(6);
                 background-image: url(../../img/qa1/m2.png);
             }
         }
