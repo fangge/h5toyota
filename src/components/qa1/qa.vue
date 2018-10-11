@@ -4,7 +4,7 @@
             <div class="ani-wrap">
                 <div class="g"></div>
                 <div class="m"></div>
-                <i class="qp animated"></i>
+                <i class="qp"></i>
                 <i class="key2"></i>
             </div>
             <p class="qa-title">飞机延误就是晴空万里中突然暴风雨…坚决阻断了你回家的路。给你一次逃bug的机会，延误险到底buy不buy呢？</p>
@@ -82,23 +82,21 @@
     }
 
     @mixin ani($name,$time,$delay) {
-        animation-name: $name;
-        animation-delay: $delay;
-        animation-duration: $time !important;
-        animation-timing-function: linear;
+        animation: $name $time $delay linear both;
     }
+
     .qa1{
         .ani-wrap {
             width: rpx(718);
             height: rpx(780);
             margin: rpx(20) auto 0;
-            background: url(bg.jpg) no-repeat;
+            background: url(../../img/qa1/bg.jpg) no-repeat;
             background-size: 100% 100%;
             position: relative;
             .g {
                 width: rpx(109);
                 height: rpx(230);
-                background: url(g.png) no-repeat;
+                background: url(../../img/qa1/g.png) no-repeat;
                 background-size: 100% 100%;
                 position: absolute;
                 left: rpx(40);
@@ -108,7 +106,7 @@
             .m {
                 width: rpx(324);
                 height: rpx(381);
-                background: url(m.png) no-repeat;
+                background: url(../../img/qa1/m.png) no-repeat;
                 background-size: 100% 100%;
                 position: absolute;
                 right: rpx(46);
@@ -123,7 +121,7 @@
             .qp {
                 width: rpx(284);
                 height: rpx(134);
-                background: url(qp.png) no-repeat;
+                background: url(../../img/qa1/qp.png) no-repeat;
                 background-size: 100% 100%;
                 top: rpx(280);
                 left: rpx(184);
@@ -132,7 +130,7 @@
             .key2 {
                 width: rpx(49);
                 height: rpx(69);
-                background-image: url(key1.png);
+                background-image: url(../../img/qa1/key1.png);
                 background-size: 100% 100%;
                 right: rpx(320);
                 bottom: rpx(115);
@@ -144,11 +142,11 @@
         @keyframes g {
             0% {
                 height: rpx(230);
-                background-image: url(g.png);
+                background-image: url(../../img/qa1/g.png);
             }
             100% {
                 height: rpx(229);
-                background-image: url(g2.png);
+                background-image: url(../../img/qa1/g2.png);
             }
         }
 
@@ -156,12 +154,12 @@
             0% {
                 width: rpx(324);
                 height: rpx(381);
-                background-image: url(m.png);
+                background-image: url(../../img/qa1/m.png);
             }
             100% {
                 width: rpx(213);
                 height: rpx(385);
-                background-image: url(m2.png);
+                background-image: url(../../img/qa1/m2.png);
             }
         }
 
@@ -195,7 +193,7 @@
         .ans1{
             width: rpx(699);
             height: rpx(592);
-            background-image: url(ans1.jpg);
+            background-image: url(../../img/qa1/ans1.jpg);
             p{
                 &.t1{
                     font-size:rpx(68);
@@ -208,7 +206,7 @@
                 display: block;
                 width: rpx(228);
                 height: rpx(62);
-                background-image:url(eye1.png);
+                background-image:url(../../img/qa1/eye1.png);
                 background-size:100% 100%;
                 position: absolute;
                 top:rpx(270);
@@ -219,19 +217,19 @@
                 0% {
                     width: rpx(228);
                     height: rpx(62);
-                    background-image:url(eye1.png);
+                    background-image:url(../../img/qa1/eye1.png);
                 }
                 100% {
                     width: rpx(222);
                     height: rpx(67);
-                    background-image:url(eye2.png);
+                    background-image:url(../../img/qa1/eye2.png);
                 }
             }
         }
         .ans2{
             width: rpx(697);
             height: rpx(613);
-            background-image: url(ans2.jpg);
+            background-image: url(../../img/qa1/ans2.jpg);
             p{
                 &.t1{
                     font-size:rpx(88);
@@ -246,7 +244,7 @@
                 display: block;
                 width: rpx(200);
                 height: rpx(122);
-                background-image:url(eye3.png);
+                background-image:url(../../img/qa1/eye3.png);
                 background-size:100% 100%;
                 position: absolute;
                 top:rpx(234);
@@ -257,12 +255,12 @@
                 0% {
                     width: rpx(200);
                     height: rpx(122);
-                    background-image:url(eye3.png);
+                    background-image:url(../../img/qa1/eye3.png);
                 }
                 100% {
                     width: rpx(194);
                     height: rpx(113);
-                    background-image:url(eye4.png);
+                    background-image:url(../../img/qa1/eye4.png);
                     top:rpx(240);
                     right:rpx(62);
                 }

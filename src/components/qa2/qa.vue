@@ -25,6 +25,7 @@
                     <i class="qp3"></i><i class="qp4"></i>
                     <i class="meye2"></i>
                     <i class="geye"></i>
+                    <i class="qp3"></i><i class="qp4"></i>
                 </div>
 
                 <div @click="nextQa" class="btn2">
@@ -34,12 +35,13 @@
                 </div>
             </div>
             <div v-if="answer === 'B'">
-                <h2 class="title">Buy个毛，老子钱多？</h2>
+                <h2 class="title">难得随心，民间招一个~</h2>
                 <div class="ans ans2">
-                    <h3>没想到这一延误就是大半天！请完年假还要扣<br>事假工资......心好塞……</h3>
-                    <p class="t1">后悔呀！</p>
-                    <p class="t2">这bug成双成对地来，<br>
-                        瞬间成了时间金钱双失青年</p>
+                    <h3>货不对板、电话关机、卷款潜逃……<br>
+                        这么老土的剧情，竟然都！发！生！了！</h3>
+                    <p class="t1">装修的<br>
+                        兄dei</p>
+                    <p class="t2">你们的良心不会痛吗？</p>
                     <i class="eye"></i>
                 </div>
 
@@ -95,7 +97,7 @@
             width: rpx(702);
             height: rpx(771);
             margin: rpx(20) auto 0;
-            background: url(bg.jpg) no-repeat;
+            background: url(../../img/qa2/bg.jpg) no-repeat;
             background-size: 100% 100%;
             position: relative;
 
@@ -106,7 +108,7 @@
             .meye {
                 width: rpx(72);
                 height: rpx(59);
-                background: url(meye1.png) no-repeat;
+                background: url(../../img/qa2/meye1.png) no-repeat;
                 background-size: 100% 100%;
                 top: rpx(425);
                 right: rpx(100);
@@ -115,7 +117,7 @@
             .gmouth {
                 width: rpx(25);
                 height: rpx(28);
-                background: url(gmouth1.png) no-repeat;
+                background: url(../../img/qa2/gmouth1.png) no-repeat;
                 background-size: 100% 100%;
                 top: rpx(575);
                 left: rpx(450);
@@ -124,7 +126,7 @@
             .qp1 {
                 width: rpx(128);
                 height: rpx(267);
-                background: url(qp1.png) no-repeat;
+                background: url(../../img/qa2/qp1.png) no-repeat;
                 background-size: 100% 100%;
                 top: rpx(130);
                 left: rpx(379);
@@ -133,7 +135,7 @@
             .qp2 {
                 width: rpx(312);
                 height: rpx(236);
-                background: url(qp2.png) no-repeat;
+                background: url(../../img/qa2/qp2.png) no-repeat;
                 background-size: 100% 100%;
                 top: rpx(485);
                 left: rpx(15);
@@ -142,7 +144,7 @@
             .gbling {
                 width: rpx(21);
                 height: rpx(39);
-                background: url(gbilng.png) no-repeat;
+                background: url(../../img/qa2/gbilng.png) no-repeat;
                 background-size: 100% 100%;
                 top: rpx(533);
                 left: rpx(503);
@@ -155,7 +157,7 @@
             0% {
                 width: rpx(25);
                 height: rpx(28);
-                background: url(gmouth1.png) no-repeat;
+                background: url(../../img/qa2/gmouth1.png) no-repeat;
                 background-size: 100% 100%;
                 top: rpx(575);
                 left: rpx(450);
@@ -163,7 +165,7 @@
             100% {
                 width: rpx(30);
                 height: rpx(47);
-                background: url(gmouth2.png) no-repeat;
+                background: url(../../img/qa2/gmouth2.png) no-repeat;
                 background-size: 100% 100%;
                 top: rpx(565);
                 left: rpx(445);
@@ -174,7 +176,7 @@
             0% {
                 width: rpx(72);
                 height: rpx(59);
-                background: url(meye1.png) no-repeat;
+                background: url(../../img/qa2/meye1.png) no-repeat;
                 background-size: 100% 100%;
                 top: rpx(425);
                 right: rpx(100);
@@ -182,24 +184,140 @@
             100% {
                 width: rpx(72);
                 height: rpx(60);
-                background: url(meye2.png) no-repeat;
+                background: url(../../img/qa2/meye2.png) no-repeat;
                 background-size: 100% 100%;
                 top: rpx(425);
                 right: rpx(100);
             }
         }
-
-        .ans1 {
-            width: rpx(699);
-            height: rpx(592);
-            background-image: url(ans1.jpg);
-
+        .ans{
+            p{
+                &.t1{
+                    color: #fff;
+                    font-weight: 600;
+                    -webkit-text-stroke: rpx(2) #000;
+                    animation: fadeInLeft .5s .6s linear both;
+                }
+                &.t2{
+                    color: #000;
+                    font-weight: 600;
+                    text-shadow:0 0 rpx(4) #fff;
+                    animation: fadeInLeft .5s .8s linear both;
+                }
+            }
         }
-        .ans2 {
+        .ans1 {
+            width: rpx(704);
+            height: rpx(653);
+            background-image: url(../../img/qa2/ans1.jpg);
+            background-size:100% 100%;
+            i{
+                display: block;
+                position: absolute;
+            }
+            .meye2{
+                width: rpx(66);
+                height: rpx(26);
+                background-image: url(../../img/qa2/meye3.png);
+                background-size:100% 100%;
+                right:rpx(138);
+                top:rpx(272);
+                animation: meye2 0s .4s linear forwards;
+            }
+            @keyframes meye2 {
+                0% {
+                    width: rpx(66);
+                    height: rpx(26);
+                    background-image: url(../../img/qa2/meye3.png);
+                }
+                100% {
+                    width: rpx(63);
+                    height: rpx(31);
+                    background-image: url(../../img/qa2/meye4.png);
+                }
+            }
+            .geye{
+                width: rpx(52);
+                height: rpx(23);
+                background-image: url(../../img/qa2/geye1.png);
+                background-size:100% 100%;
+                right:rpx(305);
+                top:rpx(353);
+
+                animation: geye 0s .6s linear forwards;
+            }
+            @keyframes geye {
+                0% {
+                    width: rpx(52);
+                    height: rpx(23);
+                    background-image: url(../../img/qa2/geye1.png);
+                }
+                100% {
+                    width: rpx(49);
+                    height: rpx(23);
+                    background-image: url(../../img/qa2/geye2.png);
+                }
+            }
+            .qp3 {
+                width: rpx(332);
+                height: rpx(102);
+                background: url(../../img/qa2/qp3.png) no-repeat;
+                background-size: 100% 100%;
+                top: rpx(202);
+                left: rpx(99);
+                animation: fadeIn 0.5s .8s linear both;
+            }
+            .qp4 {
+                width: rpx(125);
+                height: rpx(319);
+                background: url(../../img/qa2/qp4.png) no-repeat;
+                background-size: 100% 100%;
+                bottom: rpx(-10);
+                right: rpx(-10);
+                animation: fadeIn 0.5s .9s linear both;
+            }
+        }
+        .ans2{
             width: rpx(697);
             height: rpx(613);
-            background-image: url(ans2.jpg);
-            
+            background-image: url(../../img/qa2/ans2.jpg);
+            p{
+                &.t1{
+                    font-size:rpx(88);
+                    margin-bottom:rpx(40);
+                    color: #fff;
+                    margin-top:rpx(150);
+                    text-shadow:0 0 rpx(4) #000;
+                }
+                &.t2{
+                    font-size:rpx(44);
+                }
+            }
+            .eye{
+                display: block;
+                width: rpx(200);
+                height: rpx(122);
+                background-image:url(../../img/qa2/eye3.png);
+                background-size:100% 100%;
+                position: absolute;
+                top:rpx(234);
+                right:rpx(62);
+                animation: eye2 0s .4s linear forwards;
+            }
+            @keyframes eye2 {
+                0% {
+                    width: rpx(200);
+                    height: rpx(122);
+                    background-image:url(../../img/qa2/eye3.png);
+                }
+                100% {
+                    width: rpx(194);
+                    height: rpx(113);
+                    background-image:url(../../img/qa2/eye4.png);
+                    top:rpx(240);
+                    right:rpx(62);
+                }
+            }
         }
     }
 

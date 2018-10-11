@@ -121,8 +121,10 @@ const config = {
             {
           loader: 'url-loader',
           options: {
+            publicPath:'../../img/',
+            outputPath:'img/',
             limit: 8192,
-            name: 'assets/img/[name].[hash:7].[ext]?kwcache=1'
+            name: '[name].[hash:7].[ext]?kwcache=1'
           }
           },'image-webpack-loader'
         ]

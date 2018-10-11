@@ -58,7 +58,7 @@
         data() {
             return {
                 isOk: false, // 是否显示进度条
-                step: 2,
+                step: 0,
                 username: '',
                 resultShow: false,
                 answers: [],
@@ -68,16 +68,65 @@
         mounted() {
             setTimeout(() => {
                 this.isOk = true;
-            }, 1000)
+            }, 1500)
+
+            // var loader = {
+            //     uto:null,
+            //     cbfun:null,
+            //     loadW:0,
+            //     loadH:0,
+            //     total:0,
+            //     loaded:0,
+            //     loadId:'',
+            //     loadBgId:'',
+            //     loadTopId:'',
+            //     hide:function(){
+            //
+            //         if(this.cbfun) {
+            //             this.cbfun();
+            //         }
+            //     },
+            //     show:function(cb, iFileData){
+            //         this.cbfun = cb;
+            //         this.total = iFileData.length;
+            //         this.loaded = 0;
+            //         for(var i = 0; i < this.total; i++) {
+            //             this.loadImage(iFileData[i]);
+            //         }
+            //     },
+            //     loadImage:function(iData){
+            //         var _this = this;
+            //         var img = new Image();
+            //         img.onload = function () {
+            //             _this.loaded++;
+            //             _this.checkLoadComplete();
+            //         };
+            //         img.onerror = function(){
+            //             _this.loaded++;
+            //             _this.checkLoadComplete();
+            //         }
+            //         img.src = iData;
+            //     },
+            //     checkLoadComplete:function(){
+            //         if(this.loaded == this.total) {
+            //             this.hide();
+            //         }
+            //     }
+            // }
+            //
+            // loader.show(function(){
+            //     this.isOk = true;
+            // }, [
+            //     ''
+            // ]);
         },
         methods: {
             stepNext() {
-                this.step++;
-                // if (this.username) {
-                //     this.step++;
-                // } else {
-                //     alert('请输入你的名字')
-                // }
+                if (this.username) {
+                    this.step++;
+                } else {
+                    alert('请输入你的名字')
+                }
             },
             resultPage() {
                 this.resultShow = true;
@@ -271,7 +320,7 @@
     .input-wrap {
         width: rpx(701);
         height: rpx(307);
-        background: url(input_wrap.png) no-repeat;
+        background: url(../../img/input_wrap.png) no-repeat;
         background-size:100% 100%;
         position: fixed;
         left: 50%;
@@ -287,7 +336,7 @@
             line-height: rpx(40);
             text-align: center;
             border: 0;
-            background: transparent url(input.png) no-repeat;
+            background: transparent url(../../img/input.png) no-repeat;
             background-size:100% 100%;
             margin: 0 auto;
             font-size:rpx(45);
@@ -303,7 +352,7 @@
             width: rpx(650);
             height: rpx(122);
             line-height: rpx(122);
-            background: transparent url(btn.png) no-repeat;
+            background: transparent url(../../img/btn.png) no-repeat;
             background-size:100% 100%;
             margin: rpx(16) auto 0;
             color: #000;
@@ -323,8 +372,8 @@
 
     .index {
         height: 100%;
-        background: #c1c1c1 url(bg.jpg) no-repeat center 0;
-        background-size: cover;
+        background: #c1c1c1 url(../../img/bg.jpg) no-repeat center 0;
+        background-size: 100% 100%;
         i.qp {
             display: block;
             position: absolute;
@@ -335,7 +384,7 @@
             &.qp1 {
                 width: rpx(105);
                 height: rpx(217);
-                background-image: url(qp1.png);
+                background-image: url(../../img/qp1.png);
                 margin-left:rpx(-262);
                 margin-top:rpx(-108);
                 @include ani(fadeIn,.5s,0);
@@ -343,7 +392,7 @@
             &.qp2 {
                 width: rpx(108);
                 height: rpx(257);
-                background-image: url(qp2.png);
+                background-image: url(../../img/qp2.png);
                 margin-left:rpx(-332);
                 margin-top:rpx(-328);
                 @include ani(fadeIn,.5s,.2s);
@@ -351,7 +400,7 @@
             &.qp3 {
                 width: rpx(102);
                 height: rpx(233);
-                background-image: url(qp3.png);
+                background-image: url(../../img/qp3.png);
                 margin-left:rpx(232);
                 margin-top:rpx(-288);
                 @include ani(fadeIn,.5s,.4s);
@@ -359,7 +408,7 @@
             &.qp4 {
                 width: rpx(94);
                 height: rpx(167);
-                background-image: url(qp4.png);
+                background-image: url(../../img/qp4.png);
                 margin-left:rpx(92);
                 margin-top:rpx(-278);
                 @include ani(fadeIn,.5s,.6s);
@@ -371,7 +420,7 @@
         display: block;
         width: rpx(102);
         height:rpx(119);
-        background: url(hand.png) no-repeat;
+        background: url(../../img/hand.png) no-repeat;
         background-size:100% 100%;
         position: absolute;
         opacity: 0;
@@ -385,7 +434,7 @@
         display: block;
         width: rpx(65);
         height: rpx(125);
-        background: url(key.png) no-repeat;
+        background: url(../../img/key.png) no-repeat;
         -webkit-background-size: 100%;
         background-size: 100%;
         position: absolute;
@@ -437,7 +486,7 @@
             color: #000;
             font-size: rpx(31);
             font-weight: 600;
-            background: url(sbtn.png) no-repeat;
+            background: url(../../img/sbtn.png) no-repeat;
             background-size: 100% 100%;
             margin: rpx(20) auto;
             animation: fadeInDown .2s 3.2s linear both;
@@ -452,7 +501,7 @@
     .title{
         width: rpx(472);
         height: rpx(137);
-        background: url(title.png) no-repeat;
+        background: url(../../img/title.png) no-repeat;
         background-size:100% 100%;
         color: #fff;
         font-size:rpx(36);
@@ -464,7 +513,7 @@
     .btn2{
         width: rpx(692);
         height: rpx(344);
-        background-image: url(btn2_wrap.jpg);
+        background-image: url(../../img/btn2_wrap.jpg);
         background-size:100% 100%;
         margin: 0 auto;
         color: #000;
@@ -474,18 +523,27 @@
         box-sizing: border-box;
         font-weight: 600;
         animation: bounceIn .5s 1.2s linear both;
+        position: relative;
         i{
             display: block;
             width: rpx(173);
             height: rpx(88);
-            background-image: url(btn2.png);
+            background-image: url(../../img/btn2.png);
             background-size:100% 100%;
-            margin: rpx(20) auto 0;
+            position: absolute;
+            bottom:rpx(70);
+            left:50%;
+            transform: translate(-50%,0);
+            animation: btnmove 1s 5s linear infinite;
+        }
+        @keyframes btnmove {
+            0%,100%{transform: translate(-50%,0);}
+            50%{transform: translate(-46%,0);}
         }
     }
     .ans{
         background-size: 100% 100%;
-        margin: rpx(45) auto rpx(30);
+        margin: rpx(20) auto;
         position: relative;
         overflow: hidden;
         h3{
