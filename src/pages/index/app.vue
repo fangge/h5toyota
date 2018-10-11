@@ -58,7 +58,7 @@
         data() {
             return {
                 isOk: false, // 是否显示进度条
-                step: 1,
+                step: 2,
                 username: '',
                 resultShow: false,
                 answers: [],
@@ -420,5 +420,84 @@
         }
     }
 
-
+    p.qa-title {
+        width: rpx(718);
+        margin: rpx(40) auto 0;
+        font-size: rpx(28);
+        line-height: rpx(36);
+        font-weight: 600;
+        animation: fadeInDown .2s 2.8s linear both;
+    }
+    .answer {
+        li {
+            width: rpx(667);
+            height: rpx(96);
+            line-height: rpx(96);
+            text-align: center;
+            color: #000;
+            font-size: rpx(31);
+            font-weight: 600;
+            background: url(sbtn.png) no-repeat;
+            background-size: 100% 100%;
+            margin: rpx(20) auto;
+            animation: fadeInDown .2s 3.2s linear both;
+            &:first-child{
+                animation: fadeInDown .2s 3s linear both;
+            }
+        }
+    }
+    .qa-next{
+        padding: 0 rpx(25);
+    }
+    .title{
+        width: rpx(472);
+        height: rpx(137);
+        background: url(title.png) no-repeat;
+        background-size:100% 100%;
+        color: #fff;
+        font-size:rpx(36);
+        line-height: rpx(170);
+        box-sizing: border-box;
+        padding-left:rpx(30);
+        margin-top:rpx(47)
+    }
+    .btn2{
+        width: rpx(692);
+        height: rpx(344);
+        background-image: url(btn2_wrap.jpg);
+        background-size:100% 100%;
+        margin: 0 auto;
+        color: #000;
+        font-size:rpx(28);
+        line-height: rpx(36);
+        padding: rpx(34) rpx(44) 0;
+        box-sizing: border-box;
+        font-weight: 600;
+        animation: bounceIn .5s 1.2s linear both;
+        i{
+            display: block;
+            width: rpx(173);
+            height: rpx(88);
+            background-image: url(btn2.png);
+            background-size:100% 100%;
+            margin: rpx(20) auto 0;
+        }
+    }
+    .ans{
+        background-size: 100% 100%;
+        margin: rpx(45) auto rpx(30);
+        position: relative;
+        overflow: hidden;
+        h3{
+            color: #fff;
+            font-size:rpx(31);
+            font-weight: 600;
+            line-height: rpx(45);
+            padding: 0 rpx(28);
+            margin: rpx(28) 0 rpx(92);
+        }
+        p{
+                margin-left:rpx(35);
+        }
+    }
 </style>
