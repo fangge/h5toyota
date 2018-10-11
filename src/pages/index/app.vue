@@ -58,7 +58,7 @@
         data() {
             return {
                 isOk: false, // 是否显示进度条
-                step: 0,
+                step: 1,
                 username: '',
                 resultShow: false,
                 answers: [],
@@ -117,8 +117,10 @@
             loader.show(()=>{
                 this.isOk = true;
             }, [
-                'img/ans1.jpg',
-                'img/ans2.jpg',
+                'img/qa1ans1.jpg',
+                'img/qa1ans2.jpg',
+                'img/qa2ans1.jpg',
+                'img/qa2ans2.jpg',
                 'img/bg.jpg',
                 'img/qa1bg.jpg',
                 'img/qa2bg.jpg',
@@ -484,7 +486,7 @@
         font-size: rpx(28);
         line-height: rpx(36);
         font-weight: 600;
-        animation: fadeInDown .2s 2.8s linear both;
+        animation: fadeInUp .5s 2.8s linear both;
     }
     .answer {
         li {
@@ -498,9 +500,9 @@
             background: url(../../img/sbtn.png) no-repeat;
             background-size: 100% 100%;
             margin: rpx(20) auto;
-            animation: fadeInDown .2s 3.2s linear both;
+            animation: fadeInUp .5s 3.2s linear both;
             &:first-child{
-                animation: fadeInDown .2s 3s linear both;
+                animation: fadeInUp .5s 3s linear both;
             }
         }
     }

@@ -3,6 +3,7 @@
         <div v-if="qaIndex">
             <div class="ani-wrap">
                 <div class="g"></div>
+
                 <div class="m"></div>
                 <i class="qp"></i>
                 <i class="key2"></i>
@@ -112,7 +113,10 @@
                 right: rpx(46);
                 bottom: rpx(10);
                 transition: none;
-                animation: m 0s 3s linear forwards;
+
+
+                animation: m .2s 3s linear forwards;
+
             }
             i {
                 display: block;
@@ -152,13 +156,13 @@
 
         @keyframes m {
             0% {
-                width: rpx(324);
                 height: rpx(381);
                 background-image: url(../../img/qa1/m.png);
             }
             100% {
-                width: rpx(213);
                 height: rpx(385);
+                right: rpx(47);
+                bottom: rpx(3);
                 background-image: url(../../img/qa1/m2.png);
             }
         }
@@ -193,7 +197,7 @@
         .ans1{
             width: rpx(699);
             height: rpx(592);
-            background-image: url(../../img/qa1/ans1.jpg);
+            background-image: url(../../img/qa1/qa1ans1.jpg);
             p{
                 &.t1{
                     font-size:rpx(68);
@@ -229,7 +233,7 @@
         .ans2{
             width: rpx(697);
             height: rpx(613);
-            background-image: url(../../img/qa1/ans2.jpg);
+            background-image: url(../../img/qa1/qa1ans2.jpg);
             p{
                 &.t1{
                     font-size:rpx(88);

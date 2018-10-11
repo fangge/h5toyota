@@ -209,7 +209,7 @@
         .ans1 {
             width: rpx(704);
             height: rpx(653);
-            background-image: url(../../img/qa2/ans1.jpg);
+            background-image: url(../../img/qa2/qa2ans1.jpg);
             background-size:100% 100%;
             i{
                 display: block;
@@ -280,7 +280,7 @@
         .ans2{
             width: rpx(697);
             height: rpx(613);
-            background-image: url(../../img/qa2/ans2.jpg);
+            background-image: url(../../img/qa2/qa2ans2.jpg);
             p{
                 &.t1{
                     font-size:rpx(88);
