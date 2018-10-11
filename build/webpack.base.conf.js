@@ -124,7 +124,7 @@ const config = {
             publicPath:'../../img/',
             outputPath:'img/',
             limit: 8192,
-            name: '[name].[hash:7].[ext]?kwcache=1'
+            name: '[name].[ext]'
           }
           },'image-webpack-loader'
         ]

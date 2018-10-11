@@ -66,59 +66,68 @@
             }
         },
         mounted() {
-            setTimeout(() => {
-                this.isOk = true;
-            }, 1500)
-
-            // var loader = {
-            //     uto:null,
-            //     cbfun:null,
-            //     loadW:0,
-            //     loadH:0,
-            //     total:0,
-            //     loaded:0,
-            //     loadId:'',
-            //     loadBgId:'',
-            //     loadTopId:'',
-            //     hide:function(){
-            //
-            //         if(this.cbfun) {
-            //             this.cbfun();
-            //         }
-            //     },
-            //     show:function(cb, iFileData){
-            //         this.cbfun = cb;
-            //         this.total = iFileData.length;
-            //         this.loaded = 0;
-            //         for(var i = 0; i < this.total; i++) {
-            //             this.loadImage(iFileData[i]);
-            //         }
-            //     },
-            //     loadImage:function(iData){
-            //         var _this = this;
-            //         var img = new Image();
-            //         img.onload = function () {
-            //             _this.loaded++;
-            //             _this.checkLoadComplete();
-            //         };
-            //         img.onerror = function(){
-            //             _this.loaded++;
-            //             _this.checkLoadComplete();
-            //         }
-            //         img.src = iData;
-            //     },
-            //     checkLoadComplete:function(){
-            //         if(this.loaded == this.total) {
-            //             this.hide();
-            //         }
-            //     }
-            // }
-            //
-            // loader.show(function(){
+            // setTimeout(() => {
             //     this.isOk = true;
-            // }, [
-            //     ''
-            // ]);
+            // }, 1500)
+
+            var loader = {
+                uto:null,
+                cbfun:null,
+                loadW:0,
+                loadH:0,
+                total:0,
+                loaded:0,
+                loadId:'',
+                loadBgId:'',
+                loadTopId:'',
+                hide:function(){
+
+                    if(this.cbfun) {
+                        this.cbfun();
+                    }
+                },
+                show:function(cb, iFileData){
+                    this.cbfun = cb;
+                    this.total = iFileData.length;
+                    this.loaded = 0;
+                    for(var i = 0; i < this.total; i++) {
+                        this.loadImage(iFileData[i]);
+                    }
+                },
+                loadImage:function(iData){
+                    var _this = this;
+                    var img = new Image();
+                    img.onload = function () {
+                        _this.loaded++;
+                        _this.checkLoadComplete();
+                    };
+                    img.onerror = function(){
+                        _this.loaded++;
+                        _this.checkLoadComplete();
+                    }
+                    img.src = iData;
+                },
+                checkLoadComplete:function(){
+                    if(this.loaded == this.total) {
+                        this.hide();
+                    }
+                }
+            }
+
+            loader.show(()=>{
+                this.isOk = true;
+            }, [
+                'img/ans1.jpg',
+                'img/ans2.jpg',
+                'img/bg.jpg',
+                'img/qa1bg.jpg',
+                'img/qa2bg.jpg',
+                'img/btn.png',
+                'img/btn2_wrap.jpg',
+                'img/m.png',
+                'img/m2.png',
+                'img/sbtn.png',
+            ]);
         },
         methods: {
             stepNext() {

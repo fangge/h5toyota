@@ -97,7 +97,7 @@
             width: rpx(702);
             height: rpx(771);
             margin: rpx(20) auto 0;
-            background: url(../../img/qa2/bg.jpg) no-repeat;
+            background: url(../../img/qa2/qa2bg.jpg) no-repeat;
             background-size: 100% 100%;
             position: relative;
 

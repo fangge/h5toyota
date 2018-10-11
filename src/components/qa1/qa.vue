@@ -90,7 +90,7 @@
             width: rpx(718);
             height: rpx(780);
             margin: rpx(20) auto 0;
-            background: url(../../img/qa1/bg.jpg) no-repeat;
+            background: url(../../img/qa1/qa1bg.jpg) no-repeat;
             background-size: 100% 100%;
             position: relative;
             .g {
