@@ -4,13 +4,13 @@
         <div v-if="isOk" class="cont">
             <div class="index" v-if="step == 0">
                 <i class="key"></i>
-                <div class="input-wrap animated" v-if="step===0">
+                <div class="input-wrap" v-if="step===0">
                     <input type="text" placeholder="输入你的姓名" v-model="username">
                     <a @click="stepNext">测测你能承受多少Pa</a>
                     <i class="hand" id="hand1"></i>
                 </div>
-                <i class="animated qp qp1"></i><i class="animated qp qp2"></i><i class="animated qp qp3"></i><i
-                    class="animated qp qp4"></i>
+                <i class="qp qp1"></i><i class="qp qp2"></i><i class="qp qp3"></i><i
+                    class="qp qp4"></i>
             </div>
 
             <div v-if="resultShow" class="resultPage">
@@ -182,21 +182,21 @@
                 this.isOk = true;
             }
         },
-        watch:{
-            username:function(val){
-                let timer = null;
-                if(val.length>0){
-                    clearTimeout(timer);
-                    if(this.step == 0){
-                        timer = setTimeout(function () {
-                            document.getElementById('hand1').className += ' show';
-                        },5000)
-                    }
-                }else{
-                    clearTimeout(timer);
-                }
-            }
-        }
+        // watch:{
+        //     username:function(val){
+        //         let timer = null;
+        //         if(val.length>0){
+        //             clearTimeout(timer);
+        //             if(this.step == 0){
+        //                 timer = setTimeout(function () {
+        //                     document.getElementById('hand1').className += ' show';
+        //                 },5000)
+        //             }
+        //         }else{
+        //             clearTimeout(timer);
+        //         }
+        //     }
+        // }
     }
 
 </script>
@@ -205,8 +205,9 @@
     @mixin ani($name,$time,$delay){
         animation-name:$name;
         animation-delay: $delay;
-        animation-duration:$time!important;
+        animation-duration:$time;
         animation-timing-function: linear;
+        animation-fill-mode: both;
     }
     $psdBaseSize: 750;
     $maxBaseSize: 540;
@@ -335,11 +336,12 @@
         background-size:100% 100%;
         position: fixed;
         left: 50%;
-        top: 70%;
+        top: 68.5%;
         transform: translate(-50%, -50%);
         box-sizing: border-box;
         padding-top:rpx(22);
         @include ani(fadeIn,.2s,1s);
+        z-index: 99;
         input {
             display: block;
             width: rpx(651);
@@ -413,15 +415,15 @@
                 height: rpx(233);
                 background-image: url(../../img/qp3.png);
                 margin-left:rpx(232);
-                margin-top:rpx(-288);
+                margin-top:rpx(-128);
                 @include ani(fadeIn,.5s,.4s);
             }
             &.qp4 {
                 width: rpx(94);
                 height: rpx(167);
                 background-image: url(../../img/qp4.png);
-                margin-left:rpx(92);
-                margin-top:rpx(-278);
+                margin-left:rpx(190);
+                margin-top:rpx(-288);
                 @include ani(fadeIn,.5s,.6s);
             }
         }
@@ -434,10 +436,11 @@
         background: url(../../img/hand.png) no-repeat;
         background-size:100% 100%;
         position: absolute;
-        opacity: 0;
         transition: all .5s;
-        &.show{
-            opacity: 1;
+        animation: fadeIn .2s 7s linear both,handclick 1s 7.2s linear infinite;
+        @keyframes handclick {
+            0%,100%{transform: scale(1)}
+            50%{transform: scale(.85)}
         }
     }
 
@@ -450,7 +453,7 @@
         background-size: 100%;
         position: absolute;
         left: 63%;
-        top: 49%;
+        top: 43%;
         transform: translate3d(-50%, -50%, 0) rotate(0deg);
         transform-origin: top right;
         animation: keyrotate 1s linear infinite;
@@ -481,11 +484,11 @@
     }
 
     p.qa-title {
-        width: rpx(718);
-        margin: rpx(40) auto 0;
+        margin: rpx(32) auto rpx(32);
         font-size: rpx(28);
         line-height: rpx(36);
         font-weight: 600;
+        padding:0 rpx(42);
         animation: fadeInUp .5s 2.8s linear both;
     }
     .answer {
@@ -499,7 +502,7 @@
             font-weight: 600;
             background: url(../../img/sbtn.png) no-repeat;
             background-size: 100% 100%;
-            margin: rpx(20) auto;
+            margin: 0 auto rpx(28);
             animation: fadeInUp .5s 3.2s linear both;
             &:first-child{
                 animation: fadeInUp .5s 3s linear both;
@@ -566,7 +569,7 @@
             margin: rpx(28) 0 rpx(92);
         }
         p{
-                margin-left:rpx(35);
+          margin-left:rpx(35);
         }
     }
 </style>

@@ -89,7 +89,7 @@
     .qa1{
         .ani-wrap {
             width: rpx(718);
-            height: rpx(780);
+            height: rpx(781);
             margin: rpx(20) auto 0;
             background: url(../../img/qa1/qa1bg.jpg) no-repeat;
             background-size: 100% 100%;
