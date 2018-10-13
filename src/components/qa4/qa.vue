@@ -1,20 +1,29 @@
 <template>
-    <div class="qa qa3">
+    <div class="qa qa4">
         <div v-if="qaIndex">
             <div class="ani-wrap">
-                <i class="qp1"></i>
-                <i class="qp2"></i>
-                <i class="m"></i>
+                <div class="qa4s1">
+                    <span class="car"><i class="wheel"></i></span>
+                    <i class="qp"></i>
+                </div>
+                <div class="qa4s2">
+                    <p>确认过<br>
+                        眼神…<br>
+                        这就<br>
+                        是我<br>
+                        想要<br>
+                        的CAR！</p>
+                </div>
             </div>
-            <p class="qa-title">怎么说都是新房，做好清洁工作还是灰常重要滴！来pick一下网上的清洁工具，顺便逃开一次bug的机会，试试？</p>
+            <p class="qa-title">想想看，买车比娶媳妇还激动。我一定要把bug反弹，在买车时满血复活!</p>
             <ul class="answer">
-                <li @click="answerQ('A')">A.权威认证XX牌吸尘器：998元！</li>
-                <li @click="answerQ('B')">B.吸尘器只要9.9元包邮买就送四重豪礼！</li>
+                <li @click="answerQ('A')">A.XX牌8年质保的混动车</li>
+                <li @click="answerQ('B')">B.‘一诺一生，终身质保’的雷凌双擎</li>
             </ul>
         </div>
         <div class="qa-next" v-else>
 
-            <div v-if="answer === 'A'">
+            <div v-if="answer === 'B'">
                 <h2 class="title">权威认证XX牌吸尘器：998元！</h2>
                 <div class="ans1 ans">
                     <h3>假如我是权威认证，这绝对是次品！劣质品！<br>
@@ -24,33 +33,32 @@
                 </div>
 
                 <div @click="nextQa" class="btn2">
-                    有人说，踩遍无数bug才能C位出道。
-                    <br>
-                    此刻的我房子都有了，车子还会远吗？
+                    人生有无数个选择，无数个BUG，但只要选对了<br>
+                    重要的TA，每天都是狂欢节！<br>
+                    那你呢？估计能hold住多少PA的BUG？
                     <i></i>
                 </div>
             </div>
-            <div v-if="answer === 'B'">
-                <h2 class="title">权威认证XX牌吸尘器：998元！</h2>
+            <div v-if="answer === 'A'">
+                <h2 class="title">XX牌8年质保的混动车</h2>
                 <div class="ans ans2">
-                    <h3>我走过最远的路，就是网上商家的套路！<br>
-                        19.9元吸尘器形状的……钥匙扣呀！<br>
-                        谢谢你让我学会坚强。</h3>
-                    <p class="t1">这大概<br>
-                        可能也许<br>
-                        是我最<span>SKr</span>的<br>
-                        一次网上购物吧。</p>
+                    <h3>眼看着王者打到最后，<br>
+                        猪队眼友跑出来了……</h3>
+                    <p class="t1">杂牌啊！</p>
+                    <p class="t2">你这上不了台面的，<br>
+                        赶紧给我有多远滚多远。</p>
                     <i class="eye"></i>
                 </div>
 
                 <div @click="nextQa" class="btn2">
-                    有人说，踩遍无数bug才能C位出道。
-                    <br>
-                    此刻的我房子都有了，车子还会远吗？
+                    人生有无数个选择，无数个BUG，但只要选对了<br>
+                    重要的TA，每天都是狂欢节！<br>
+                    那你呢？估计能hold住多少PA的BUG？
                     <i></i>
                 </div>
             </div>
         </div>
+
     </div>
 </template>
 
@@ -65,7 +73,7 @@
         },
         methods: {
             nextQa() {
-                this.$emit('stepNext');
+                this.$emit('resultPage');
             },
             answerQ(data) {
                 this.qaIndex = false;
@@ -91,63 +99,85 @@
         animation-timing-function: linear;
     }
 
-    .qa3 {
+    .qa4 {
         .ani-wrap {
-            width: rpx(698);
+            width: rpx(704);
             height: rpx(771);
             margin: rpx(20) auto 0;
-            background: url(../../img/qa3/qa3bg.jpg) no-repeat;
+            background: url(../../img/qa4/qa4bg.jpg) no-repeat;
             background-size: 100% 100%;
             position: relative;
-
+            .qa4s1{
+                width: rpx(395);
+                height: rpx(249);
+                background: url(../../img/qa4/qa4s1.jpg) no-repeat;
+                background-size: 100% 100%;
+                overflow: hidden;
+                position: absolute;
+                top:rpx(21);
+                left:rpx(17);
+            }
+            .qa4s2{
+                width: rpx(231);
+                height: rpx(267);
+                background: url(../../img/qa4/qa4s2.png) no-repeat;
+                background-size: 100% 100%;
+                overflow: hidden;
+                position: absolute;
+                top:rpx(-2);
+                right:rpx(32);
+                animation:fadeIn .6s 3s linear both;
+                p{
+                    font-size:rpx(26);
+                    line-height: rpx(36);
+                    position: absolute;
+                    left:rpx(16);
+                    top:rpx(32);
+                    font-weight: 600;
+                }
+            }
             i {
                 display: block;
                 position: absolute;
             }
-
-            .qp1 {
-                width: rpx(407);
-                height: rpx(226);
-                background: url(../../img/qa3/qp1.png) no-repeat;
+            .car{
+                display: block;
+                width: rpx(245);
+                height: rpx(116);
+                background: url(../../img/qa4/car.png) no-repeat;
                 background-size: 100% 100%;
-                top: rpx(156);
-                left: rpx(16);
-                animation: fadeIn 0.5s 1.4s linear both;
-            }
-            .qp2 {
-                width: rpx(166);
-                height: rpx(240);
-                background: url(../../img/qa3/qp2.png) no-repeat;
-                background-size: 100% 100%;
-                top: rpx(370);
-                left: rpx(260);
-                animation: fadeIn 0.5s 2.2s linear both;
-            }
-            .m{
-                width: rpx(647);
-                height: rpx(399);
-                background: url(../../img/qa3/m1.png) no-repeat;
-                background-size: 100% 100%;
-                bottom: rpx(5);
-                right: rpx(5);
-                animation: qa3m 0s 1.2s linear forwards;
-            }
-            @keyframes qa3m {
-                0% {
-                    background-image: url(../../img/qa3/m1.png);
-                }
-                100% {
-                    background-image: url(../../img/qa3/m2.png);
+                position: absolute;
+                bottom:rpx(30);
+                right:0;
+                animation: car .7s 1s linear both;
+                .wheel{
+                    width: rpx(58);
+                    height: rpx(57);
+                    background: url(../../img/qa4/wheel.png) no-repeat;
+                    background-size: 100% 100%;
+                    top:rpx(76);
+                    left:rpx(27);
+                    transform-origin: center center;
+                    animation: wheel 1s 1s linear both;
                 }
             }
-        }
-
-        .title{
-            width: rpx(591);
-            height:rpx(137);
-            background: url(../../img/qa3/qa3title.png) no-repeat;
-            background-size: 100% 100%;
-            letter-spacing: 0;
+            .qp{
+                width: rpx(67);
+                height: rpx(136);
+                background: url(../../img/qa4/qp1.png) no-repeat;
+                background-size: 100% 100%;
+                top:rpx(35);
+                left:rpx(183);
+                animation: fadeIn .5s 2.2s linear both;
+            }
+            @keyframes car {
+                0%{transform: translate(100%,0)}
+                100%{transform: translate(0,0)}
+            }
+            @keyframes wheel{
+                0%{transform: rotate(0)}
+                100%{transform: rotate(-360deg)}
+            }
         }
         .ans{
             p{
@@ -219,19 +249,18 @@
             height: rpx(613);
             background-image: url(../../img/qa2/qa2ans2.jpg);
             h3{
-                line-height: 1.2;
+                //line-height: 1.2;
             }
             p{
                 &.t1{
-                    font-size:rpx(58);
-                    color: #000;
-                    margin-top:rpx(95);
-                    text-shadow:0 0 rpx(4) #fff;
-                    span{
-                        font-size:rpx(93);
-                        color: #fff;
-                        text-shadow:0 0 rpx(4) #000;
-                    }
+                    font-size:rpx(88);
+                    margin-bottom:rpx(40);
+                    color: #fff;
+                    margin-top:rpx(150);
+                    text-shadow:0 0 rpx(2) #000;
+                }
+                &.t2{
+                    font-size:rpx(39);
                 }
             }
             .eye{

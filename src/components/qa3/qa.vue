@@ -126,7 +126,7 @@
             .m{
                 width: rpx(647);
                 height: rpx(399);
-                background: url(../../img/qa3/m1.png) no-repeat;
+                background: url(../../img/qa3/m2.png) no-repeat;
                 background-size: 100% 100%;
                 bottom: rpx(5);
                 right: rpx(5);
@@ -134,10 +134,10 @@
             }
             @keyframes qa3m {
                 0% {
-                    background-image: url(../../img/qa3/m1.png);
+                    background-image: url(../../img/qa3/m2.png);
                 }
                 100% {
-                    background-image: url(../../img/qa3/m2.png);
+                    background-image: url(../../img/qa3/m1.png);
                 }
             }
         }

@@ -161,7 +161,7 @@
                 height: rpx(385);
                 right: rpx(46);
                 bottom: rpx(6);
-                background-image: url(../../img/qa1/m2.png);
+                background-image: url(../../img/qa1/qa1m2.png);
             }
         }
 

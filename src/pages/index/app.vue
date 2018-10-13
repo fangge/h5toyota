@@ -58,7 +58,7 @@
         data() {
             return {
                 isOk: false, // 是否显示进度条
-                step: 3,
+                step: 4,
                 username: '',
                 resultShow: false,
                 answers: [],
@@ -66,9 +66,6 @@
             }
         },
         mounted() {
-            // setTimeout(() => {
-            //     this.isOk = true;
-            // }, 1500)
 
             var loader = {
                 uto:null,
@@ -182,21 +179,21 @@
                 this.isOk = true;
             }
         },
-        watch:{
-            username:function(val){
-                let timer = null;
-                if(val.length>0){
-                    clearTimeout(timer);
-                    if(this.step == 0){
-                        timer = setTimeout(function () {
-                            document.getElementById('hand1').className += ' show';
-                        },5000)
-                    }
-                }else{
-                    clearTimeout(timer);
-                }
-            }
-        }
+        // watch:{
+        //     username:function(val){
+        //         let timer = null;
+        //         if(val.length>0){
+        //             clearTimeout(timer);
+        //             if(this.step == 0){
+        //                 timer = setTimeout(function () {
+        //                     document.getElementById('hand1').className += ' show';
+        //                 },5000)
+        //             }
+        //         }else{
+        //             clearTimeout(timer);
+        //         }
+        //     }
+        // }
     }
 
 </script>
@@ -434,10 +431,11 @@
         background: url(../../img/hand.png) no-repeat;
         background-size:100% 100%;
         position: absolute;
-        opacity: 0;
         transition: all .5s;
-        &.show{
-            opacity: 1;
+        animation: fadeIn .2s 8s linear both,handclick 1s 8.4s infinite linear;
+        @keyframes handclick {
+            0%,100%{transform: scale(1)}
+            50%{transform: scale(.85)}
         }
     }
 
@@ -570,5 +568,11 @@
         p{
                 margin-left:rpx(35);
         }
+    }
+    .qa{
+        position: fixed;
+        left:50%;
+        top:50%;
+        transform: translate(-50%,-50%);
     }
 </style>
