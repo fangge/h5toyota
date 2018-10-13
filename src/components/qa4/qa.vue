@@ -24,7 +24,7 @@
         <div class="qa-next" v-else>
 
             <div v-if="answer === 'B'">
-                <h2 class="title">权威认证XX牌吸尘器：998元！</h2>
+                <h2 class="title title2">‘一诺一生，终身质保’的雷凌双擎</h2>
                 <div class="ans1 ans">
                     <h3>假如我是权威认证，这绝对是次品！劣质品！<br>
                         用一次即烂的吸钱器！</h3>
@@ -164,7 +164,7 @@
             .qp{
                 width: rpx(67);
                 height: rpx(136);
-                background: url(../../img/qa4/qp1.png) no-repeat;
+                background: url(../../img/qa4/qa4qp1.png) no-repeat;
                 background-size: 100% 100%;
                 top:rpx(35);
                 left:rpx(183);
@@ -178,6 +178,12 @@
                 0%{transform: rotate(0)}
                 100%{transform: rotate(-360deg)}
             }
+        }
+        .title2{
+            width: rpx(676);
+            height: rpx(137);
+            background: url(../../img/qa4/qa4title.jpg) no-repeat;
+            background-size: 100% 100%;
         }
         .ans{
             p{
