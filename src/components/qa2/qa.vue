@@ -22,7 +22,6 @@
                     <h3>该配合你演出的我视而不见……<br>
                         本王要的地中海风格被装得这么乡土风情，你<br>
                         当我是‘你好凯蒂猫’吗？</h3>
-                    <i class="qp3"></i><i class="qp4"></i>
                     <i class="meye2"></i>
                     <i class="geye"></i>
                     <i class="qp3"></i><i class="qp4"></i>
@@ -208,7 +207,7 @@
         }
         .ans1 {
             width: rpx(704);
-            height: rpx(653);
+            height: rpx(628);
             background-image: url(../../img/qa2/qa2ans1.jpg);
             background-size:100% 100%;
             i{
@@ -221,7 +220,7 @@
                 background-image: url(../../img/qa2/meye3.png);
                 background-size:100% 100%;
                 right:rpx(138);
-                top:rpx(272);
+                top:rpx(272-25);
                 animation: meye2 0s .4s linear forwards;
             }
             @keyframes meye2 {
@@ -242,7 +241,7 @@
                 background-image: url(../../img/qa2/geye1.png);
                 background-size:100% 100%;
                 right:rpx(305);
-                top:rpx(353);
+                top:rpx(353-25);
 
                 animation: geye 0s .6s linear forwards;
             }

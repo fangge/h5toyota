@@ -58,7 +58,7 @@
         data() {
             return {
                 isOk: false, // 是否显示进度条
-                step: 1,
+                step: 3,
                 username: '',
                 resultShow: false,
                 answers: [],
@@ -481,8 +481,8 @@
     }
 
     p.qa-title {
-        width: rpx(718);
         margin: rpx(40) auto 0;
+        padding:0 rpx(40);
         font-size: rpx(28);
         line-height: rpx(36);
         font-weight: 600;
@@ -517,9 +517,11 @@
         color: #fff;
         font-size:rpx(36);
         line-height: rpx(170);
+        font-weight: 600;
         box-sizing: border-box;
         padding-left:rpx(30);
-        margin-top:rpx(47)
+        margin-top:rpx(47);
+        letter-spacing: rpx(-4);
     }
     .btn2{
         width: rpx(692);

@@ -113,7 +113,7 @@
                 right: rpx(46);
                 bottom: rpx(10);
                 transition: none;
-                animation: m .2s 3s linear forwards;
+                animation: m 0s 3s linear forwards;
 
             }
             i {
