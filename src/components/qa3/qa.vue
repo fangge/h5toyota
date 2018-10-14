@@ -112,7 +112,7 @@
                 background-size: 100% 100%;
                 top: rpx(156);
                 left: rpx(16);
-                animation: fadeIn 0.5s 1.4s linear both;
+                animation: fadeIn 0.5s 1.8s linear both;
             }
             .qp2 {
                 width: rpx(166);
@@ -121,7 +121,7 @@
                 background-size: 100% 100%;
                 top: rpx(370);
                 left: rpx(260);
-                animation: fadeIn 0.5s 2.2s linear both;
+                animation: fadeIn 0.5s 2.6s linear both;
             }
             .m{
                 width: rpx(647);
@@ -181,7 +181,7 @@
                 background-size:100% 100%;
                 right:rpx(83);
                 top:rpx(545);
-                animation: mouth 0s .4s linear forwards;
+                animation: mouth 0s 1s linear forwards;
             }
             @keyframes mouth {
                 0% {
@@ -210,7 +210,7 @@
                 top: rpx(86);
                 left: 50%;
                 transform:translate(-50%,0);
-                animation: fadeIn 0.5s .8s linear both;
+                animation: fadeIn 0.5s 1.4s linear both;
             }
 
         }

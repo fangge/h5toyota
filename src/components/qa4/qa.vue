@@ -22,13 +22,13 @@
             </div>
             <p class="qa-title">想想看，买车比娶媳妇还激动。我一定要把bug反弹，在买车时满血复活!</p>
             <ul class="answer">
-                <li @click="answerQ('A')">A.XX牌8年质保的混动车</li>
-                <li @click="answerQ('B')">B.‘一诺一生，终身质保’的雷凌双擎</li>
+                <li @click="answerQ('A')">A.‘一诺一生，终身质保’的雷凌双擎</li>
+                <li @click="answerQ('B')">B.XX牌8年质保的混动车</li>
             </ul>
         </div>
         <div class="qa-next" v-else>
 
-            <div v-if="answer === 'B'">
+            <div v-if="answer === 'A'">
                 <h2 class="title title2">‘一诺一生，终身质保’的雷凌双擎</h2>
                 <div class="ans1 ans">
                     <i class="qa4mouth"></i>
@@ -42,11 +42,11 @@
                     <i></i>
                 </div>
             </div>
-            <div v-if="answer === 'A'">
+            <div v-if="answer === 'B'">
                 <h2 class="title">XX牌8年质保的混动车</h2>
                 <div class="ans ans2">
                     <h3>眼看着王者打到最后，<br>
-                        猪队眼友跑出来了……</h3>
+                        猪队友跑出来了……</h3>
                     <p class="t1">杂牌啊！</p>
                     <p class="t2">你这上不了台面的，<br>
                         赶紧给我有多远滚多远。</p>
@@ -119,6 +119,7 @@
                 position: absolute;
                 top:rpx(21);
                 left:rpx(17);
+                animation: fadeIn .4s 2.4s linear both;
             }
             .qa4s2{
                 width: rpx(231);
@@ -129,7 +130,7 @@
                 position: absolute;
                 top:rpx(-2);
                 right:rpx(32);
-                animation:fadeIn .6s 3s linear both;
+                animation:fadeIn .6s 3.4s linear both;
                 p{
                     font-size:rpx(26);
                     line-height: rpx(36);
@@ -149,7 +150,7 @@
                 bottom:rpx(30);
                 right:0;
                 position: absolute;
-                animation: car .7s 1s linear both;
+                animation: car .7s 2.8s linear both;
                 .shadow1{
                     width: rpx(243);
                     height: rpx(28);
@@ -196,7 +197,7 @@
                 background-size: 100% 100%;
                 top:rpx(35);
                 left:rpx(183);
-                animation: fadeIn .5s 2.2s linear both;
+                animation: fadeIn .5s 3.2s linear both;
             }
             @keyframes car {
                 0%{transform: translate(100%,0)}
@@ -214,7 +215,7 @@
                 transform-origin: right center;
                 right:rpx(15);
                 bottom:rpx(32);
-                animation: fadeIn .5s 3.2s linear both,car2 1s 3.2s linear both;
+                animation: fadeIn .8s 1s linear both,car2 1s 1.4s linear both;
             }
             @keyframes car2 {
                 0%{transform: scale(.4)}

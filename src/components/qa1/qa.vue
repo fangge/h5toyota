@@ -29,7 +29,7 @@
                 </div>
 
                 <div @click="nextQa" class="btn2">
-                    就算心态有点崩，也算安全到家了。淡定吃鸡<br>一把，准备带我亲爱的验房去an…<br>准备进入坟墓，oh no~是求婚啦！
+                    就算心态有点崩，也算安全到家了。淡定吃鸡<br>一把，准备带我亲爱的验房去and…<br>准备进入坟墓，oh no~是求婚啦！
                     <i></i>
                 </div>
             </div>
@@ -44,7 +44,7 @@
                 </div>
 
                 <div @click="nextQa"  class="btn2">
-                    就算心态有点崩，也算安全到家了。淡定吃鸡<br>一把，准备带我亲爱的验房去an…<br>准备进入坟墓，oh no~是求婚啦！
+                    就算心态有点崩，也算安全到家了。淡定吃鸡<br>一把，准备带我亲爱的验房去and…<br>准备进入坟墓，oh no~是求婚啦！
                     <i></i>
                 </div>
             </div>
@@ -113,7 +113,7 @@
                 right: rpx(46);
                 bottom: rpx(10);
                 transition: none;
-                animation: m 0s 3s linear forwards;
+                animation: m 0s 3.5s linear forwards;
 
             }
             i {
@@ -127,7 +127,7 @@
                 background-size: 100% 100%;
                 top: rpx(280);
                 left: rpx(184);
-                @include ani(fadeIn, .5s, 1.5s);
+                @include ani(fadeIn, .5s, 2s);
             }
             .key2 {
                 width: rpx(49);
@@ -137,7 +137,7 @@
                 right: rpx(320);
                 bottom: rpx(115);
                 transform-origin: right top;
-                animation: key 1.5s 0s linear infinite, fadeOut 0s 3s linear forwards;
+                animation: key 1.5s 0s linear infinite, fadeOut 0s 3.5s linear forwards;
             }
         }
 

@@ -19,26 +19,18 @@
                     <div class="result-top"><p id="resulttop">测试结果</p></div>
                     <div class="result-bg">
                         <h3>你是一个能承受<br><span>{{score}}</span>帕BUG的人</h3>
-                        <p v-if="score>=1 && score <=25">你可能还没理解什么叫BUG，<br>但我很佩服你越BUG越不怕的精神，<br>继续跌倒吧朋友，摔瘸了总会有站不起来的那天，<br>嘻嘻。
-                        </p>
-                        <p v-else-if="score>=26 && score <=50">差点及格？那还是不及格啊！<br>
-                            不用风中凌乱了，那依然解救不了你脆弱的心灵。<br>
-                            有时候BUG就是一副解药，啃两口吞下去，睡一觉第二天醒来你依然是个王者。
-                        </p>
-                        <p v-else-if="score>=51 && score <=75">二货，就算你抗压能力强，能熬夜吃苦，就要死扛吗？<br>
-                            正确的办法是——找个TA护航，偶尔听听一诺一生的情话，偶尔踩踩BUG，打怪升级才快啊！
-                        </p>
-                        <p v-else>嘿嘿，你个老司机 !<br>别什么BUG不BUG，我瞧对你来说都是小咖。别搞那一套天生强大，我知道你背后闷骚努力，就猥琐着浪吧。<br>
-                            给你比心，C位出道的机会来了！
-                        </p>
+                        <div class="result-intro result1" v-if="score>=1 && score <=25"></div>
+                        <div class="result-intro result2" v-else-if="score>=26 && score <=50"></div>
+                        <div class="result-intro result3" v-else-if="score>=51 && score <=75"></div>
+                        <div class="result-intro result4" v-else></div>
                     </div>
                     <div class="reg-wrap" id="coverbot">
-                        <img src="../../img/reg.png" class="reg"><p>马上扫码测测<br>你能承受多少BUG！</p>
+                        <img src="../../img/reg.png" class="reg"><p></p>
                     </div>
 
                 </div>
-                <a @click="resultImg">分享测试结果</a>
-                <a href="https://www.gac-toyota.com.cn/vehicles/newlevin%20hev ">进入无忧计划</a>
+                <a @click="resultImg" v-if="!popShow">分享测试结果</a>
+                <a href="https://www.gac-toyota.com.cn/vehicles/newlevin%20hev" v-if="!popShow">进入无忧计划</a>
             </div>
             <div v-else class="qaPage">
                 <qa1 v-if="step === 1" @stepNext="stepNext" @setAnswer="setAnswer"></qa1>
@@ -74,7 +66,7 @@
                 username: '',
                 resultShow: false,
                 answers: [],
-                score: 0,
+                score: 26,
                 result_title:'测试显示',
                 popShow:false,
                 shareloading:true
@@ -205,7 +197,7 @@
               this.popShow = false;
             },
             convert2canvas() {
-
+                this.popShow  = true;
                 var cntElem = document.getElementById('result-cover');
 
                 var shareContent = cntElem;//需要截图的包裹的（原生的）DOM 对象
@@ -236,15 +228,15 @@
 
                     // 【重要】默认转化的格式为png,也可设置为其他格式
                     var img = Canvas2Image.convertToJPEG(canvas, canvas.width, canvas.height);
-                    this.popShow  = true;
+
 
                     setTimeout(()=> {
                         this.shareloading = false;
                         document.getElementById('coverbot').style.display = 'none';
                         document.getElementById('share-pop').appendChild(img);
 
-                        img.style.width =  canvas.width / 2 + "px";
-                        img.style.height =  canvas.height / 2 + "px"
+                        // img.style.width =  canvas.width / 2 + "px";
+                        // img.style.height =  canvas.height / 2 + "px"
                     },200)
                 });
             }
@@ -407,6 +399,7 @@
             font-weight: 600;
             color: #000;
             font-family: 'pinghei';
+            caret-color: rgba(0, 0, 0, 0.25);
             &::placeholder{
                 color: #a2a2a2;
             }
@@ -425,7 +418,7 @@
             font-weight: 600;
         }
         .hand{
-            right:rpx(-5);
+            right:rpx(10);
             bottom:rpx(-5)
         }
     }
@@ -433,11 +426,17 @@
     body, html, .wrap, .cont {
         height: 100%;
     }
-
+    input:focus{
+        outline: 0;
+    }
     .index {
+        width: 100%;
         height: 100%;
         background: #c1c1c1 url(../../img/bg.jpg) no-repeat center 0;
         background-size: 100% 100%;
+        position: absolute;
+        top:0;
+        left:0;
         i.qp {
             display: block;
             position: absolute;
@@ -510,7 +509,7 @@
         animation: keyrotate 1s linear infinite;
     }
 
-    @-webkit-keyframes keyrotate {
+    @keyframes keyrotate {
         0% {
             transform: translate3d(-50%, -50%, 0) rotate(0deg);
         }
@@ -535,12 +534,13 @@
     }
 
     p.qa-title {
+        width: rpx(667);
         margin: rpx(40) auto 0;
-        padding:0 rpx(40);
+        padding:0 auto;
         font-size: rpx(28);
         line-height: rpx(36);
         font-weight: 600;
-        animation: fadeInUp .5s 2.8s linear both;
+        animation: fadeInUp .5s 4s linear both;
     }
     .answer {
         li {
@@ -554,9 +554,9 @@
             background: url(../../img/sbtn.png) no-repeat;
             background-size: 100% 100%;
             margin: rpx(20) auto;
-            animation: fadeInUp .5s 3.2s linear both;
+            animation: fadeInUp .5s 4.4s linear both;
             &:first-child{
-                animation: fadeInUp .5s 3s linear both;
+                animation: fadeInUp .5s 4.2s linear both;
             }
         }
     }
@@ -589,7 +589,7 @@
         padding: rpx(34) rpx(44) 0;
         box-sizing: border-box;
         font-weight: 600;
-        animation: bounceIn .8s 1.8s linear both;
+        animation: fadeInUp .5s 1.8s linear both;
         position: relative;
         i{
             display: block;
@@ -618,8 +618,10 @@
             font-size:rpx(31);
             font-weight: 600;
             line-height: rpx(45);
-            padding: 0 rpx(28);
-            margin: rpx(28) 0 rpx(92);
+            width: 92%;
+            margin: rpx(28) auto rpx(92);
+            white-space: nowrap;
+            letter-spacing: rpx(-2);
         }
         p{
                 margin-left:rpx(35);
@@ -677,7 +679,7 @@
         background-image: url(../../img/resultbg.png);
         background-size:100% 100%;
         overflow: hidden;
-        margin: rpx(-50) auto rpx(30);
+        margin: rpx(-60) auto rpx(30);
         h3{
             font-size: rpx(36);
             line-height: rpx(52);
@@ -692,15 +694,28 @@
                 font-weight: 600;
             }
         }
-        p{
-            font-size:rpx(31);
-            padding:0 rpx(38);
-            font-weight: 600;
-            line-height: 1.8;
-            letter-spacing: rpx(-4);
-            text-align: left;
-        }
-
+    }
+    .result-intro{
+        //position: absolute;
+        margin-left:rpx(28)
+    }
+    @mixin resultbg($width,$height,$bg){
+        width: rpx($width);
+        height:rpx($height);
+        background-image: url($bg);
+        background-size:100% 100%;
+    }
+    .result1{
+        @include resultbg(513,166,'../../img/result1.png')
+    }
+    .result2{
+        @include resultbg(562,213,'../../img/result2.png')
+    }
+    .result3{
+        @include resultbg(564,214,'../../img/result3.png')
+    }
+    .result4{
+        @include resultbg(589,213,'../../img/result4.png')
     }
     .share-pop{
         position: fixed;
@@ -711,6 +726,7 @@
         background: rgba(0, 0, 0, 0.7);
         img{
             display: block;
+            width: 90%;
             position: absolute;
             left:50%;
             top:50%;
@@ -726,6 +742,7 @@
     }
     .reg-wrap{
         display: none;
+        padding-bottom:rpx(50);
         .reg{
             width: rpx(200);
             display: inline-block;
@@ -734,10 +751,27 @@
         }
         p{
             display: inline-block;
-            font-size:rpx(50);
-            text-align: right;
+            width:rpx(393);
+            height:rpx(88);
+            background-image: url(../../img/regintro.png);
+            background-size:100% 100%;
             vertical-align: middle;
             margin-left:rpx(20)
+        }
+    }
+    @media only screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3){
+        // iphonex
+        p.qa-title{
+            margin-top:rpx(50)
+        }
+        .answer li{
+            margin: rpx(30) auto;
+        }
+        .title{
+            margin-top:0
+        };
+        .ans{
+            margin: rpx(35) auto;
         }
     }
 

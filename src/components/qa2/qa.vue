@@ -111,7 +111,7 @@
                 background-size: 100% 100%;
                 top: rpx(425);
                 right: rpx(100);
-                animation: meye 0s .4s linear forwards;
+                animation: meye 0s 1s linear forwards;
             }
             .gmouth {
                 width: rpx(25);
@@ -120,7 +120,7 @@
                 background-size: 100% 100%;
                 top: rpx(575);
                 left: rpx(450);
-                animation: gmouth 0s .8s linear forwards;
+                animation: gmouth 0s 1.6s linear forwards;
             }
             .qp1 {
                 width: rpx(128);
@@ -129,7 +129,7 @@
                 background-size: 100% 100%;
                 top: rpx(130);
                 left: rpx(379);
-                animation: fadeIn 0.5s .6s linear both;
+                animation: fadeIn 0.5s 1.4s linear both;
             }
             .qp2 {
                 width: rpx(312);
@@ -138,7 +138,7 @@
                 background-size: 100% 100%;
                 top: rpx(485);
                 left: rpx(15);
-                animation: fadeIn 0.5s 1.6s linear both;
+                animation: fadeIn 0.5s 2.5s linear both;
             }
             .gbling {
                 width: rpx(21);
@@ -148,7 +148,7 @@
                 top: rpx(533);
                 left: rpx(503);
                 opacity: 0;
-                animation: bounceIn 1s 1.4s infinite forwards;
+                animation: bounceIn 1s 1.6s infinite forwards;
             }
         }
 
@@ -221,7 +221,7 @@
                 background-size:100% 100%;
                 right:rpx(138);
                 top:rpx(272-25);
-                animation: meye2 0s .4s linear forwards;
+                animation: meye2 0s 1s linear forwards;
             }
             @keyframes meye2 {
                 0% {
@@ -243,7 +243,7 @@
                 right:rpx(305);
                 top:rpx(353-25);
 
-                animation: geye 0s .6s linear forwards;
+                animation: geye 0s 1.6s linear forwards;
             }
             @keyframes geye {
                 0% {
@@ -264,7 +264,7 @@
                 background-size: 100% 100%;
                 top: rpx(202);
                 left: rpx(99);
-                animation: fadeIn 0.5s .8s linear both;
+                animation: fadeIn 0.5s 2s linear both;
             }
             .qp4 {
                 width: rpx(125);
@@ -273,7 +273,7 @@
                 background-size: 100% 100%;
                 bottom: rpx(-10);
                 right: rpx(-10);
-                animation: fadeIn 0.5s .9s linear both;
+                animation: fadeIn 0.5s 2.6s linear both;
             }
         }
         .ans2{
@@ -313,7 +313,7 @@
                     width: rpx(194);
                     height: rpx(113);
                     background-image:url(../../img/qa2/eye4.png);
-                    top:rpx(240);
+                    top:rpx(242);
                     right:rpx(62);
                 }
             }
