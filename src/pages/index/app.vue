@@ -1,8 +1,9 @@
 <template>
     <div class="wrap">
+
         <loadbar @loadSuccess="loadSuccess" :isOk="isOk"></loadbar>
         <div v-if="isOk" class="cont">
-            <div class="index" v-if="step == 0">
+            <div class="index" v-if="step == 0 && !resultShow">
                 <i class="key"></i>
                 <div class="input-wrap animated" v-if="step===0">
                     <input type="text" placeholder="输入你的姓名" v-model="username">
@@ -14,21 +15,30 @@
             </div>
 
             <div v-if="resultShow" class="resultPage">
-                你是一个能承受{{score}}帕BUG的人
-                <div v-if="score>=1 && score <=25">你可能还没理解什么叫BUG，但我很佩服你越BUG越不怕的精神，继续跌倒吧朋友，摔瘸了总会有站不起来的那天，嘻嘻。
+                <div id="result-cover">
+                    <div class="result-top"><p id="resulttop">测试结果</p></div>
+                    <div class="result-bg">
+                        <h3>你是一个能承受<br><span>{{score}}</span>帕BUG的人</h3>
+                        <p v-if="score>=1 && score <=25">你可能还没理解什么叫BUG，<br>但我很佩服你越BUG越不怕的精神，<br>继续跌倒吧朋友，摔瘸了总会有站不起来的那天，<br>嘻嘻。
+                        </p>
+                        <p v-else-if="score>=26 && score <=50">差点及格？那还是不及格啊！<br>
+                            不用风中凌乱了，那依然解救不了你脆弱的心灵。<br>
+                            有时候BUG就是一副解药，啃两口吞下去，睡一觉第二天醒来你依然是个王者。
+                        </p>
+                        <p v-else-if="score>=51 && score <=75">二货，就算你抗压能力强，能熬夜吃苦，就要死扛吗？<br>
+                            正确的办法是——找个TA护航，偶尔听听一诺一生的情话，偶尔踩踩BUG，打怪升级才快啊！
+                        </p>
+                        <p v-else>嘿嘿，你个老司机 !<br>别什么BUG不BUG，我瞧对你来说都是小咖。别搞那一套天生强大，我知道你背后闷骚努力，就猥琐着浪吧。<br>
+                            给你比心，C位出道的机会来了！
+                        </p>
+                    </div>
+                    <div class="reg-wrap" id="coverbot">
+                        <img src="../../img/reg.png" class="reg"><p>马上扫码测测<br>你能承受多少BUG！</p>
+                    </div>
+
                 </div>
-                <div v-else-if="score>=26 && score <=50">差点及格？那还是不及格啊！
-                    不用风中凌乱了，那依然解救不了你脆弱的心灵。
-                    有时候BUG就是一副解药，啃两口吞下去，睡一觉第二天醒来你依然是个王者。
-                </div>
-                <div v-else-if="score>=51 && score <=75">二货，就算你抗压能力强，能熬夜吃苦，就要死扛吗？
-                    正确的办法是——找个TA护航，偶尔听听一诺一生的情话，偶尔踩踩BUG，打怪升级才快啊！
-                </div>
-                <div v-else>嘿嘿，你个老司机 !别什么BUG不BUG，我瞧对你来说都是小咖。别搞那一套天生强大，我知道你背后闷骚努力，就猥琐着浪吧。
-                    给你比心，C位出道的机会来了！
-                </div>
-                <a @click="resultImg">分享测试结果</a><a
-                    href="https://www.gac-toyota.com.cn/vehicles/newlevin%20hev ">进入无忧计划</a>
+                <a @click="resultImg">分享测试结果</a>
+                <a href="https://www.gac-toyota.com.cn/vehicles/newlevin%20hev ">进入无忧计划</a>
             </div>
             <div v-else class="qaPage">
                 <qa1 v-if="step === 1" @stepNext="stepNext" @setAnswer="setAnswer"></qa1>
@@ -38,13 +48,15 @@
             </div>
 
         </div>
-
+        <div class="share-pop" id="share-pop" v-if="popShow" @click="popClose">
+            <vue-loading type="bubbles" color="#ffe67f" :size="{ width: '100px', height: '100px' }" v-if="shareloading"></vue-loading>
+        </div>
     </div>
 </template>
 
 <script>
     import html2canvas from 'html2canvas';
-    import Canvas2Image from '../../assets/canvas2image';
+    import { VueLoading } from 'vue-loading-template'
     import loadbar from '../../components/processbar/progress-bar';
     import qa1 from '../../components/qa1/qa';
     import qa2 from '../../components/qa2/qa';
@@ -53,16 +65,19 @@
 
     export default {
         components: {
-            loadbar, qa1, qa2, qa3, qa4
+            loadbar, qa1, qa2, qa3, qa4,VueLoading
         },
         data() {
             return {
                 isOk: false, // 是否显示进度条
-                step: 4,
+                step: 0,
                 username: '',
                 resultShow: false,
                 answers: [],
-                score: 0
+                score: 0,
+                result_title:'测试显示',
+                popShow:false,
+                shareloading:true
             }
         },
         mounted() {
@@ -114,18 +129,25 @@
             loader.show(()=>{
                 this.isOk = true;
             }, [
-                'img/qa1ans1.jpg',
-                'img/qa1ans2.jpg',
-                'img/qa2ans1.jpg',
-                'img/qa2ans2.jpg',
                 'img/bg.jpg',
-                'img/qa1bg.jpg',
-                'img/qa2bg.jpg',
                 'img/btn.png',
                 'img/btn2_wrap.jpg',
+                'img/car.png',
+                'img/car2.png',
                 'img/m.png',
+                'img/m1.png',
                 'img/m2.png',
-                'img/sbtn.png',
+                'img/qa1ans1.jpg',
+                'img/qa1ans2.jpg',
+                'img/qa1bg.jpg',
+                'img/qa1m2.png',
+                'img/qa2ans1.jpg',
+                'img/qa2ans2.jpg',
+                'img/qa2bg.jpg',
+                'img/qa3ans1.jpg',
+                'img/qa3bg.jpg',
+                'img/qa4ans2.jpg',
+                'img/qa4bg.jpg'
             ]);
         },
         methods: {
@@ -144,7 +166,7 @@
                         alen++;
                     }
                 }
-                if (alen === 1) {
+                if (alen === 1 || alen === 0) {
                     this.score = this.randomNum(1, 25)
                 } else if (alen === 2) {
                     this.score = this.randomNum(26, 50)
@@ -171,29 +193,62 @@
                 this.answers.push(data);
             },
             resultImg() {
-                html2canvas(document.body).then(canvas => {
-                    document.body.appendChild(canvas)
-                });
+                document.getElementById('resulttop').innerText = this.username;
+                document.getElementById('coverbot').style.display = 'block';
+                this.convert2canvas();
             },
             loadSuccess() {
                 this.isOk = true;
+            },
+            popClose(){
+                document.getElementById('share-pop').removeChild(document.getElementById('share-pop').firstChild);
+              this.popShow = false;
+            },
+            convert2canvas() {
+
+                var cntElem = document.getElementById('result-cover');
+
+                var shareContent = cntElem;//需要截图的包裹的（原生的）DOM 对象
+                var width = shareContent.offsetWidth; //获取dom 宽度
+                var height = shareContent.offsetHeight; //获取dom 高度
+                var canvas = document.createElement("canvas"); //创建一个canvas节点
+                var scale = 2; //定义任意放大倍数 支持小数
+                canvas.width = width * scale; //定义canvas 宽度 * 缩放
+                canvas.height = height * scale; //定义canvas高度 *缩放
+                canvas.getContext("2d").scale(scale, scale); //获取context,设置scale
+                var opts = {
+                    scale: scale, // 添加的scale 参数
+                    canvas: canvas, //自定义 canvas
+                    // logging: true, //日志开关，便于查看html2canvas的内部执行流程
+                    width: width, //dom 原始宽度
+                    height: height,
+                    useCORS: true // 【重要】开启跨域配置
+                };
+
+                html2canvas(shareContent, opts).then( (canvas) =>{
+
+                    var context = canvas.getContext('2d');
+                    // 【重要】关闭抗锯齿
+                    context.mozImageSmoothingEnabled = false;
+                    context.webkitImageSmoothingEnabled = false;
+                    context.msImageSmoothingEnabled = false;
+                    context.imageSmoothingEnabled = false;
+
+                    // 【重要】默认转化的格式为png,也可设置为其他格式
+                    var img = Canvas2Image.convertToJPEG(canvas, canvas.width, canvas.height);
+                    this.popShow  = true;
+
+                    setTimeout(()=> {
+                        this.shareloading = false;
+                        document.getElementById('coverbot').style.display = 'none';
+                        document.getElementById('share-pop').appendChild(img);
+
+                        img.style.width =  canvas.width / 2 + "px";
+                        img.style.height =  canvas.height / 2 + "px"
+                    },200)
+                });
             }
         },
-        // watch:{
-        //     username:function(val){
-        //         let timer = null;
-        //         if(val.length>0){
-        //             clearTimeout(timer);
-        //             if(this.step == 0){
-        //                 timer = setTimeout(function () {
-        //                     document.getElementById('hand1').className += ' show';
-        //                 },5000)
-        //             }
-        //         }else{
-        //             clearTimeout(timer);
-        //         }
-        //     }
-        // }
     }
 
 </script>
@@ -273,6 +328,7 @@
     html, body {
         font-family: 'pinghei';
         background: transparent;
+        font-weight: 600;
     }
 
     img {
@@ -533,7 +589,7 @@
         padding: rpx(34) rpx(44) 0;
         box-sizing: border-box;
         font-weight: 600;
-        animation: bounceIn .5s 1.2s linear both;
+        animation: bounceIn .8s 1.8s linear both;
         position: relative;
         i{
             display: block;
@@ -575,4 +631,114 @@
         top:50%;
         transform: translate(-50%,-50%);
     }
+    .result-top{
+        width: rpx(200);
+        height: rpx(117);
+        background-image: url(../../img/resultop.png);
+        background-size:100% 100%;
+        box-sizing: border-box;
+        padding-top:rpx(46);
+        margin-left:rpx(47);
+        p{
+            color: #000;
+            text-shadow: 0 0 rpx(5) #ffe680;
+            font-size: rpx(38);
+            font-weight: 600;
+            text-align: center;
+            width: rpx(185);
+            white-space: nowrap;
+            overflow: hidden;
+            line-height: 1.5;
+            text-overflow: ellipsis;
+            margin: 0 auto;
+        }
+    }
+    .resultPage{
+        height: 100%;
+        background-image: url(../../img/resultbg.jpg);
+        background-size:100% 100%;
+        text-align: center;
+        a{
+            display: inline-block;
+            width: rpx(339);
+            height: rpx(103);
+            background-image: url(../../img/resultbtn.png);
+            background-size:100% 100%;
+            line-height: rpx(103);
+            text-align: center;
+            color: #000;
+            font-size:rpx(31);
+            font-weight: 600;
+        }
+    }
+    .result-bg{
+        width: rpx(682);
+        height: rpx(960);
+        background-image: url(../../img/resultbg.png);
+        background-size:100% 100%;
+        overflow: hidden;
+        margin: rpx(-50) auto rpx(30);
+        h3{
+            font-size: rpx(36);
+            line-height: rpx(52);
+            font-weight: 600;
+            color: #000;
+            margin:rpx(95) 0 rpx(90) rpx(82);
+            text-align: left;
+            span{
+                font-size:rpx(62);
+                color: #ff5f5f;
+                text-shadow: 0 0 rpx(4) #000;
+                font-weight: 600;
+            }
+        }
+        p{
+            font-size:rpx(31);
+            padding:0 rpx(38);
+            font-weight: 600;
+            line-height: 1.8;
+            letter-spacing: rpx(-4);
+            text-align: left;
+        }
+
+    }
+    .share-pop{
+        position: fixed;
+        left:0;
+        top:0;
+        bottom:0;
+        right:0;
+        background: rgba(0, 0, 0, 0.7);
+        img{
+            display: block;
+            position: absolute;
+            left:50%;
+            top:50%;
+            transform: translate(-50%,-50%);
+        }
+        .vue-loading{
+            position: absolute;
+            left:50%;
+            top:50%;
+            transform: translate(-50%,-50%);
+            z-index: 99;
+        }
+    }
+    .reg-wrap{
+        display: none;
+        .reg{
+            width: rpx(200);
+            display: inline-block;
+            text-align: left;
+            vertical-align: middle;
+        }
+        p{
+            display: inline-block;
+            font-size:rpx(50);
+            text-align: right;
+            vertical-align: middle;
+            margin-left:rpx(20)
+        }
+    }
+
 </style>

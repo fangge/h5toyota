@@ -255,8 +255,8 @@
                     width: rpx(194);
                     height: rpx(113);
                     background-image:url(../../img/qa2/eye4.png);
-                    top:rpx(240);
-                    right:rpx(62);
+                    top:rpx(246);
+                    right:rpx(64);
                 }
             }
         }

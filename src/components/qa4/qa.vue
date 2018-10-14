@@ -3,8 +3,12 @@
         <div v-if="qaIndex">
             <div class="ani-wrap">
                 <div class="qa4s1">
-                    <span class="car"><i class="wheel"></i></span>
+                    <div class="car_wrap">
+                        <span class="car"><i class="wheel"></i><i class="wheel-line"></i></span>
+                        <i class="shadow1"></i>
+                    </div>
                     <i class="qp"></i>
+
                 </div>
                 <div class="qa4s2">
                     <p>确认过<br>
@@ -14,6 +18,7 @@
                         想要<br>
                         的CAR！</p>
                 </div>
+                <i class="car2"></i>
             </div>
             <p class="qa-title">想想看，买车比娶媳妇还激动。我一定要把bug反弹，在买车时满血复活!</p>
             <ul class="answer">
@@ -26,10 +31,8 @@
             <div v-if="answer === 'B'">
                 <h2 class="title title2">‘一诺一生，终身质保’的雷凌双擎</h2>
                 <div class="ans1 ans">
-                    <h3>假如我是权威认证，这绝对是次品！劣质品！<br>
-                        用一次即烂的吸钱器！</h3>
-                    <i class="qp3"></i>
-                    <i class="mouth"></i>
+                    <i class="qa4mouth"></i>
+                    <i class="qp2"></i><i class="qp3"></i>
                 </div>
 
                 <div @click="nextQa" class="btn2">
@@ -140,16 +143,31 @@
                 display: block;
                 position: absolute;
             }
+            .car_wrap{
+                width: rpx(245);
+                height: rpx(116);
+                bottom:rpx(30);
+                right:0;
+                position: absolute;
+                animation: car .7s 1s linear both;
+                .shadow1{
+                    width: rpx(243);
+                    height: rpx(28);
+                    background: url(../../img/qa4/shadow1.png) no-repeat;
+                    background-size: 100% 100%;
+                    bottom:rpx(-20);
+                    left:0;
+                    z-index: 10;
+                }
+            }
             .car{
                 display: block;
                 width: rpx(245);
                 height: rpx(116);
                 background: url(../../img/qa4/car.png) no-repeat;
                 background-size: 100% 100%;
-                position: absolute;
-                bottom:rpx(30);
-                right:0;
-                animation: car .7s 1s linear both;
+                position: relative;
+                z-index: 11;
                 .wheel{
                     width: rpx(58);
                     height: rpx(57);
@@ -159,6 +177,16 @@
                     left:rpx(27);
                     transform-origin: center center;
                     animation: wheel 1s 1s linear both;
+                    z-index: 99;
+                }
+                .wheel-line{
+                    width: rpx(79);
+                    height:rpx(12);
+                    background: url(../../img/qa4/wheel_line.png) no-repeat;
+                    background-size: 100% 100%;
+                    position: absolute;
+                    top:rpx(118);
+                    left:rpx(68)
                 }
             }
             .qp{
@@ -177,6 +205,20 @@
             @keyframes wheel{
                 0%{transform: rotate(0)}
                 100%{transform: rotate(-360deg)}
+            }
+            .car2{
+                width: rpx(566);
+                height: rpx(234);
+                background: url(../../img/qa4/car2.png) no-repeat;
+                background-size: 100% 100%;
+                transform-origin: right center;
+                right:rpx(15);
+                bottom:rpx(32);
+                animation: fadeIn .5s 3.2s linear both,car2 1s 3.2s linear both;
+            }
+            @keyframes car2 {
+                0%{transform: scale(.4)}
+                100%{transform: scale(1)}
             }
         }
         .title2{
@@ -202,51 +244,59 @@
             }
         }
         .ans1 {
-            width: rpx(683);
-            height: rpx(639);
-            background-image: url(../../img/qa3/qa3ans1.jpg);
+            width: rpx(701);
+            height: rpx(634);
+            background-image: url(../../img/qa4/qa4ans2.jpg);
             background-size:100% 100%;
+            overflow: visible;
             i{
                 display: block;
                 position: absolute;
             }
-            .mouth{
-                width: rpx(42);
-                height: rpx(35);
-                background-image: url(../../img/qa3/gmouth1.png);
+            .qa4mouth{
+                width: rpx(65);
+                height: rpx(16);
+                background-image: url(../../img/qa4/msmell.png);
                 background-size:100% 100%;
-                right:rpx(83);
-                top:rpx(545);
-                animation: mouth 0s .4s linear forwards;
+                top:rpx(218);
+                left:rpx(198);
+                animation: qa4mouth 0s .4s linear forwards;
             }
-            @keyframes mouth {
-                0% {
-                    width: rpx(42);
-                    height: rpx(35);
-                    background-image: url(../../img/qa3/gmouth1.png);
+            @keyframes qa4mouth {
+                0%{
+                    width: rpx(65);
+                    height: rpx(16);
+                    background-image: url(../../img/qa4/msmell.png);
                     background-size:100% 100%;
-                    right:rpx(83);
-                    top:rpx(545);
+                    top:rpx(218);
+                    left:rpx(198)
                 }
-                100% {
-                    width: rpx(44);
-                    height: rpx(48);
-                    background-image: url(../../img/qa3/gmouth2.png);
+                100%{
+                    width: rpx(72);
+                    height: rpx(38);
+                    background-image: url(../../img/qa4/msmell2.png);
                     background-size:100% 100%;
-                    right:rpx(83);
-                    top:rpx(550);
+                    top:rpx(212);
+                    left:rpx(196)
                 }
             }
-
-            .qp3 {
-                width: rpx(325);
-                height: rpx(337);
-                background: url(../../img/qa3/qp3.png) no-repeat;
-                background-size: 100% 100%;
-                top: rpx(86);
-                left: 50%;
-                transform:translate(-50%,0);
-                animation: fadeIn 0.5s .8s linear both;
+            .qp2{
+                width: rpx(160);
+                height: rpx(229);
+                background-image: url(../../img/qa4/qa4qp2.png);
+                background-size:100% 100%;
+                top:rpx(-35);
+                left:rpx(-20);
+                animation: fadeIn .4s .6s linear both;
+            }
+            .qp3{
+                width: rpx(163);
+                height: rpx(146);
+                background-image: url(../../img/qa4/qa4qp3.png);
+                background-size:100% 100%;
+                bottom:rpx(32);
+                right:rpx(18);
+                animation: fadeIn .4s 1s linear both;
             }
 
         }
