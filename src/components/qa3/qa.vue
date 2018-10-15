@@ -15,7 +15,7 @@
         <div class="qa-next" v-else>
 
             <div v-if="answer === 'A'">
-                <h2 class="title">权威认证XX牌吸尘器：998元！</h2>
+                <h2 class="title title1">权威认证XX牌吸尘器：998元！</h2>
                 <div class="ans1 ans">
                     <h3>假如我是权威认证，这绝对是次品！劣质品！<br>
                         用一次即烂的吸钱器！</h3>
@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div v-if="answer === 'B'">
-                <h2 class="title">权威认证XX牌吸尘器：998元！</h2>
+                <h2 class="title  title2">吸尘器只要9.9元包邮买就送四重豪礼</h2>
                 <div class="ans ans2">
                     <h3>我走过最远的路，就是网上商家的套路！<br>
                         19.9元吸尘器形状的……钥匙扣呀！<br>
@@ -131,7 +131,7 @@
                 background: url(../../img/qa3/m2.png) no-repeat;
                 background-size: 100% 100%;
                 bottom: rpx(5);
-                right: rpx(5);
+                right: rpx(10);
                 animation: qa3m 0s 1.2s linear forwards;
                 transform: translateZ(0);
             }
@@ -145,13 +145,7 @@
             }
         }
 
-        .title{
-            width: rpx(591);
-            height:rpx(137);
-            background: url(../../img/qa3/qa3title.png) no-repeat;
-            background-size: 100% 100%;
-            letter-spacing: 0;
-        }
+
         .ans{
             p{
                 &.t1{
@@ -170,7 +164,22 @@
                 }
             }
         }
+        .title1{
+            width: rpx(591);
+            height:rpx(137);
+            background: url(../../img/qa3/qa3title.png) no-repeat;
+            background-size: 100% 100%;
+            letter-spacing: 0;
+        }
+        .title2{
+            width: rpx(698);
+            height:rpx(137);
+            background: url(../../img/qa3/qa3title2.png) no-repeat;
+            background-size: 100% 100%;
+            letter-spacing: 0;
+        }
         .ans1 {
+
             width: rpx(683);
             height: rpx(639);
             background-image: url(../../img/qa3/qa3ans1.jpg);
@@ -221,6 +230,7 @@
 
         }
         .ans2{
+
             width: rpx(697);
             height: rpx(613);
             background-image: url(../../img/qa2/qa2ans2.jpg);

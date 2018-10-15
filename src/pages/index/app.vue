@@ -23,14 +23,14 @@
                     <div class="result-top"><p id="resulttop">测试结果</p></div>
                     <div class="result-bg">
                         <h3>你是一个能承受<br><span>{{score}}</span>帕BUG的人</h3>
-                        <div class="result-intro result1" v-if="score>=1 && score <=25"></div>
-                        <div class="result-intro result2" v-else-if="score>=26 && score <=50"></div>
-                        <div class="result-intro result3" v-else-if="score>=51 && score <=75"></div>
-                        <div class="result-intro result4" v-else></div>
+                        <img class="result-intro result1" v-if="score>=1 && score <=25" src="../../img/result1.png">
+                        <img class="result-intro result2" v-else-if="score>=26 && score <=50"  src="../../img/result2.png">
+                        <img class="result-intro result3" v-else-if="score>=51 && score <=75"  src="../../img/result3.png">
+                        <img class="result-intro result4"  src="../../img/result4.png" v-else>
                     </div>
                     <div class="reg-wrap" id="coverbot">
                         <img src="../../img/reg.png" class="reg">
-                        <p></p>
+                        <img src="../../img/regintro.png" alt="" class="p">
                     </div>
 
                 </div>
@@ -52,9 +52,10 @@
                 <a @click.stop="resultImg">生成图片</a>
             </div>
             <div v-else>
-                <vue-loading type="bubbles" color="#ffe67f" :size="{ width: '100px', height: '100px' }"
-                             v-if="shareloading"></vue-loading>
+                <vue-loading type="bubbles" color="#ffe67f" :size="{ width: '100px', height: '100px' }" v-if="shareloading"></vue-loading>
             </div>
+            <div id="share-img-box"></div>
+            <blockquote v-if="showImg">长按图片保存</blockquote>
         </div>
     </div>
 </template>
@@ -79,7 +80,7 @@
                 username: '',
                 resultShow: false,
                 answers: [],
-                score: 26,
+                score: 0,
                 result_title: '测试显示',
                 popShow: false,
                 shareloading: false,
@@ -170,28 +171,41 @@
               }
             },
             musicInit() {
-                //----------页面初始化------------
+                let _this = this;
 
                 if (sessionStorage.bgmusic == 'pause') {
-                    this.playBgMusic(false);
+                    _this.playBgMusic(false);
                 } else {
-                    this.playBgMusic(true);
+                    _this.playBgMusic(true);
                     //----------处理自动播放------------
                     //--创建页面监听，等待微信端页面加载完毕 触发音频播放
-                    document.addEventListener('DOMContentLoaded', function () {
+                    document.addEventListener('DOMContentLoaded',  ()=>{
                         function audioAutoPlay() {
-                            this.playBgMusic(true);
+                            _this.playBgMusic(true);
                             document.addEventListener("WeixinJSBridgeReady",  ()=> {
-                                this.playBgMusic(true);
+                                _this.playBgMusic(true);
                             }, false);
                         }
 
                         audioAutoPlay();
                     });
 
+                    if (window.WeixinJSBridge) {
+                        WeixinJSBridge.invoke('getNetworkType', {}, (e)=> {
+                            _this.playBgMusic(true);
+                        }, false);
+                    } else {
+                        document.addEventListener("WeixinJSBridgeReady", () => {
+                            WeixinJSBridge.invoke('getNetworkType', {}, () => {
+                                _this.playBgMusic(true);
+                            });
+                        }, false);
+                    }
+
+
                     //--创建触摸监听，当浏览器打开页面时，触摸屏幕触发事件，进行音频播放
                     function audioAutoPlay() {
-                        this.playBgMusic(true);
+                        _this.playBgMusic(true);
                         document.removeEventListener('touchstart', audioAutoPlay);
                     }
 
@@ -206,21 +220,13 @@
                 var onVisibilityChange = () =>{
                     if (!document[hiddenProperty]) {
                         if (!sessionStorage.bgmusic || sessionStorage.bgmusic == 'play') {
-                            this.audiobg.play();
+                            _this.audiobg.play();
                         }
                     } else {
-                        this.audiobg.pause();
+                        _this.audiobg.pause();
                     }
                 }
                 document.addEventListener(visibilityChangeEvent, onVisibilityChange);
-            },
-            //---------背景音乐开关----------
-            triggerBgMusic() {
-                if (!sessionStorage.bgmusic || sessionStorage.bgmusic == 'play') {
-                    this.playBgMusic(false);
-                } else {
-                    this.playBgMusic(true);
-                }
             },
             //---------音乐播放和暂停----------
             playBgMusic(val) {
@@ -288,9 +294,18 @@
             loadSuccess() {
                 this.isOk = true;
             },
-            popClose() {
-                document.getElementById('share-pop').removeChild(document.getElementById('share-pop').firstChild);
-                this.popShow = false;
+            popClose(event) {
+                if(event.target.className === 'share-pop'){
+                    document.getElementById('share-img-box').removeChild(document.getElementById('share-img-box').firstChild);
+                    this.popShow = false;
+                    this.showImg = false;
+                }
+            },
+            DPR() {
+                if (window.devicePixelRatio && window.devicePixelRatio > 1) {
+                    return window.devicePixelRatio;
+                }
+                return 1;
             },
             convert2canvas() {
 
@@ -300,7 +315,7 @@
                 var width = shareContent.offsetWidth; //获取dom 宽度
                 var height = shareContent.offsetHeight; //获取dom 高度
                 var canvas = document.createElement("canvas"); //创建一个canvas节点
-                var scale = 2; //定义任意放大倍数 支持小数
+                var scale = this.DPR(); //定义任意放大倍数 支持小数
                 canvas.width = width * scale; //定义canvas 宽度 * 缩放
                 canvas.height = height * scale; //定义canvas高度 *缩放
                 canvas.getContext("2d").scale(scale, scale); //获取context,设置scale
@@ -323,16 +338,16 @@
                     context.imageSmoothingEnabled = false;
 
                     // 【重要】默认转化的格式为png,也可设置为其他格式
-                    var img = Canvas2Image.convertToJPEG(canvas, canvas.width, canvas.height);
+                    var img = Canvas2Image.convertToImage(canvas, canvas.width, canvas.height);
 
 
                     setTimeout(() => {
                         this.shareloading = false;
                         document.getElementById('coverbot').style.display = 'none';
-                        document.getElementById('share-pop').appendChild(img);
+                        document.getElementById('share-img-box').appendChild(img);
 
-                        // img.style.width =  canvas.width / 2 + "px";
-                        // img.style.height =  canvas.height / 2 + "px"
+                        //img.style.width =  canvas.width / 2 + "px";
+                        //img.style.height =  canvas.height / 2 + "px"
                     }, 200)
                 });
             }
@@ -818,27 +833,26 @@
         margin-left: rpx(28)
     }
 
-    @mixin resultbg($width,$height,$bg) {
+    @mixin resultbg($width,$height) {
+        display: block;
         width: rpx($width);
         height: rpx($height);
-        background-image: url($bg);
-        background-size: 100% 100%;
     }
 
     .result1 {
-        @include resultbg(513, 166, '../../img/result1.png')
+        @include resultbg(513, 166)
     }
 
     .result2 {
-        @include resultbg(562, 213, '../../img/result2.png')
+        @include resultbg(562, 213)
     }
 
     .result3 {
-        @include resultbg(564, 214, '../../img/result3.png')
+        @include resultbg(564, 214)
     }
 
     .result4 {
-        @include resultbg(589, 213, '../../img/result4.png')
+        @include resultbg(589, 213)
     }
 
     .share-pop {
@@ -851,7 +865,7 @@
         z-index: 99;
         img {
             display: block;
-            width: 90%;
+            width: 80%;
             position: absolute;
             left: 50%;
             top: 50%;
@@ -864,6 +878,14 @@
             transform: translate(-50%, -50%);
             z-index: 99;
         }
+        blockquote{
+            font-size:rpx(36);
+            color: #fff;
+            position: absolute;
+            left:50%;
+            bottom:rpx(50);
+            transform: translate(-50%,0);
+        }
     }
 
     .reg-wrap {
@@ -875,12 +897,10 @@
             text-align: left;
             vertical-align: middle;
         }
-        p {
+        img.p {
             display: inline-block;
             width: rpx(393);
             height: rpx(88);
-            background-image: url(../../img/regintro.png);
-            background-size: 100% 100%;
             vertical-align: middle;
             margin-left: rpx(20)
         }
