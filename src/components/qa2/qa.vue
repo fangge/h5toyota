@@ -112,6 +112,7 @@
                 top: rpx(425);
                 right: rpx(100);
                 animation: meye 0s 1s linear forwards;
+                transform: translateZ(0);
             }
             .gmouth {
                 width: rpx(25);
@@ -121,6 +122,7 @@
                 top: rpx(575);
                 left: rpx(450);
                 animation: gmouth 0s 1.6s linear forwards;
+                transform: translateZ(0);
             }
             .qp1 {
                 width: rpx(128);
@@ -130,6 +132,7 @@
                 top: rpx(130);
                 left: rpx(379);
                 animation: fadeIn 0.5s 1.4s linear both;
+                transform: translateZ(0);
             }
             .qp2 {
                 width: rpx(312);
@@ -139,6 +142,7 @@
                 top: rpx(485);
                 left: rpx(15);
                 animation: fadeIn 0.5s 2.5s linear both;
+                transform: translateZ(0);
             }
             .gbling {
                 width: rpx(21);
@@ -149,6 +153,7 @@
                 left: rpx(503);
                 opacity: 0;
                 animation: bounceIn 1s 1.6s infinite forwards;
+                transform: translateZ(0);
             }
         }
 
@@ -196,12 +201,14 @@
                     font-weight: 600;
                     -webkit-text-stroke: rpx(2) #000;
                     animation: fadeInLeft .5s .6s linear both;
+                    transform: translateZ(0);
                 }
                 &.t2{
                     color: #000;
                     font-weight: 600;
                     text-shadow:0 0 rpx(4) #fff;
                     animation: fadeInLeft .5s .8s linear both;
+                    transform: translateZ(0);
                 }
             }
         }
@@ -222,6 +229,7 @@
                 right:rpx(138);
                 top:rpx(272-25);
                 animation: meye2 0s 1s linear forwards;
+                transform: translateZ(0);
             }
             @keyframes meye2 {
                 0% {
@@ -242,7 +250,7 @@
                 background-size:100% 100%;
                 right:rpx(305);
                 top:rpx(353-25);
-
+                transform: translateZ(0);
                 animation: geye 0s 1.6s linear forwards;
             }
             @keyframes geye {
@@ -265,6 +273,7 @@
                 top: rpx(202);
                 left: rpx(99);
                 animation: fadeIn 0.5s 2s linear both;
+                transform: translateZ(0);
             }
             .qp4 {
                 width: rpx(125);
@@ -274,6 +283,7 @@
                 bottom: rpx(-10);
                 right: rpx(-10);
                 animation: fadeIn 0.5s 2.6s linear both;
+                transform: translateZ(0);
             }
         }
         .ans2{
@@ -302,6 +312,7 @@
                 top:rpx(234);
                 right:rpx(62);
                 animation: eye2 0s .4s linear forwards;
+                transform: translateZ(0);
             }
             @keyframes eye2 {
                 0% {

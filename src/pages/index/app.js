@@ -5,10 +5,10 @@ import wxApi from '../../assets/wxapi';
 import '../../assets/font/zt.css';
 import '../../assets/animate.css';
 wxApi.shareToPYQ.opts = wxApi.sendToPY.opts = {
-    img_url:'',
+    img_url:'http://img.gd.sohu.com/norefer/toyota/20181017/0.jpg',
     link:location.href,
-    title:'测测你能承受多少Pa',
-    desc:'分享文案'
+    title:'人生无处不是bug',
+    desc:'快来测测你能 多少Pa!'
 }
 window.Canvas2Image = function () {
 

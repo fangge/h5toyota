@@ -120,6 +120,7 @@
                 top:rpx(21);
                 left:rpx(17);
                 animation: fadeIn .4s 2.4s linear both;
+                transform: translateZ(0);
             }
             .qa4s2{
                 width: rpx(231);
@@ -131,6 +132,7 @@
                 top:rpx(-2);
                 right:rpx(32);
                 animation:fadeIn .6s 3.4s linear both;
+                transform: translateZ(0);
                 p{
                     font-size:rpx(26);
                     line-height: rpx(36);
@@ -151,6 +153,7 @@
                 right:0;
                 position: absolute;
                 animation: car .7s 2.8s linear both;
+                transform: translateZ(0);
                 .shadow1{
                     width: rpx(243);
                     height: rpx(28);
@@ -179,6 +182,7 @@
                     transform-origin: center center;
                     animation: wheel 1s 1s linear both;
                     z-index: 99;
+                    transform: translateZ(0);
                 }
                 .wheel-line{
                     width: rpx(79);
@@ -198,6 +202,7 @@
                 top:rpx(35);
                 left:rpx(183);
                 animation: fadeIn .5s 3.2s linear both;
+                transform: translateZ(0);
             }
             @keyframes car {
                 0%{transform: translate(100%,0)}
@@ -216,6 +221,7 @@
                 right:rpx(15);
                 bottom:rpx(32);
                 animation: fadeIn .8s 1s linear both,car2 1s 1.4s linear both;
+                transform: translateZ(0);
             }
             @keyframes car2 {
                 0%{transform: scale(.4)}
@@ -262,6 +268,7 @@
                 top:rpx(218);
                 left:rpx(198);
                 animation: qa4mouth 0s .4s linear forwards;
+                transform: translateZ(0);
             }
             @keyframes qa4mouth {
                 0%{
@@ -330,6 +337,7 @@
                 top:rpx(234);
                 right:rpx(62);
                 animation: eye2 0s .4s linear forwards;
+                transform: translateZ(0);
             }
             @keyframes eye2 {
                 0% {

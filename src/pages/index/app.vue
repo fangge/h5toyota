@@ -1,6 +1,10 @@
 <template>
     <div class="wrap">
-
+        <div :class="'music '+musicplay" @click="musicCheck" v-if="!showImg"></div>
+        <audio id="audio" loop>
+            <source src="https://hd.huya.com/entertainWeekly15/bg.mp3" type="audio/mpeg">
+            Your browser does not support the audio tag.
+        </audio>
         <loadbar @loadSuccess="loadSuccess" :isOk="isOk"></loadbar>
         <div v-if="isOk" class="cont">
             <div class="index" v-if="step == 0 && !resultShow">
@@ -25,12 +29,14 @@
                         <div class="result-intro result4" v-else></div>
                     </div>
                     <div class="reg-wrap" id="coverbot">
-                        <img src="../../img/reg.png" class="reg"><p></p>
+                        <img src="../../img/reg.png" class="reg">
+                        <p></p>
                     </div>
 
                 </div>
-                <a @click="resultImg" v-if="!popShow">分享测试结果</a>
-                <a href="https://www.gac-toyota.com.cn/vehicles/newlevin%20hev" v-if="!popShow">进入无忧计划</a>
+                <a  v-if="!showImg" @click="showPop">分享测试结果</a>
+                <a href="https://www.gac-toyota.com.cn/vehicles/newlevin%20hev" v-if="!showImg">进入无忧计划</a>
+                <span class="copyright">music by by AudionautiX.com</span>
             </div>
             <div v-else class="qaPage">
                 <qa1 v-if="step === 1" @stepNext="stepNext" @setAnswer="setAnswer"></qa1>
@@ -41,14 +47,21 @@
 
         </div>
         <div class="share-pop" id="share-pop" v-if="popShow" @click="popClose">
-            <vue-loading type="bubbles" color="#ffe67f" :size="{ width: '100px', height: '100px' }" v-if="shareloading"></vue-loading>
+            <div class="share-tip" v-if="!showImg">
+                <i></i>
+                <a @click.stop="resultImg">生成图片</a>
+            </div>
+            <div v-else>
+                <vue-loading type="bubbles" color="#ffe67f" :size="{ width: '100px', height: '100px' }"
+                             v-if="shareloading"></vue-loading>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
     import html2canvas from 'html2canvas';
-    import { VueLoading } from 'vue-loading-template'
+    import {VueLoading} from 'vue-loading-template'
     import loadbar from '../../components/processbar/progress-bar';
     import qa1 from '../../components/qa1/qa';
     import qa2 from '../../components/qa2/qa';
@@ -57,7 +70,7 @@
 
     export default {
         components: {
-            loadbar, qa1, qa2, qa3, qa4,VueLoading
+            loadbar, qa1, qa2, qa3, qa4, VueLoading
         },
         data() {
             return {
@@ -67,58 +80,61 @@
                 resultShow: false,
                 answers: [],
                 score: 26,
-                result_title:'测试显示',
-                popShow:false,
-                shareloading:true
+                result_title: '测试显示',
+                popShow: false,
+                shareloading: false,
+                audiobg:null,
+                musicplay:'',
+                showImg:false
             }
         },
         mounted() {
-
+            this.audiobg = document.getElementById('audio')
             var loader = {
-                uto:null,
-                cbfun:null,
-                loadW:0,
-                loadH:0,
-                total:0,
-                loaded:0,
-                loadId:'',
-                loadBgId:'',
-                loadTopId:'',
-                hide:function(){
+                uto: null,
+                cbfun: null,
+                loadW: 0,
+                loadH: 0,
+                total: 0,
+                loaded: 0,
+                loadId: '',
+                loadBgId: '',
+                loadTopId: '',
+                hide: function () {
 
-                    if(this.cbfun) {
+                    if (this.cbfun) {
                         this.cbfun();
                     }
                 },
-                show:function(cb, iFileData){
+                show: function (cb, iFileData) {
                     this.cbfun = cb;
                     this.total = iFileData.length;
                     this.loaded = 0;
-                    for(var i = 0; i < this.total; i++) {
+                    for (var i = 0; i < this.total; i++) {
                         this.loadImage(iFileData[i]);
                     }
                 },
-                loadImage:function(iData){
+                loadImage: function (iData) {
                     var _this = this;
                     var img = new Image();
                     img.onload = function () {
                         _this.loaded++;
                         _this.checkLoadComplete();
                     };
-                    img.onerror = function(){
+                    img.onerror = function () {
                         _this.loaded++;
                         _this.checkLoadComplete();
                     }
                     img.src = iData;
                 },
-                checkLoadComplete:function(){
-                    if(this.loaded == this.total) {
+                checkLoadComplete: function () {
+                    if (this.loaded == this.total) {
                         this.hide();
                     }
                 }
             }
 
-            loader.show(()=>{
+            loader.show(() => {
                 this.isOk = true;
             }, [
                 'img/bg.jpg',
@@ -141,8 +157,83 @@
                 'img/qa4ans2.jpg',
                 'img/qa4bg.jpg'
             ]);
+            this.musicInit();
         },
         methods: {
+            musicCheck(){
+              if(this.musicplay === ''){
+                  this.musicplay = 'pause';
+                  this.playBgMusic(false);
+              }else{
+                  this.musicplay = '';
+                  this.playBgMusic(true);
+              }
+            },
+            musicInit() {
+                //----------页面初始化------------
+
+                if (sessionStorage.bgmusic == 'pause') {
+                    this.playBgMusic(false);
+                } else {
+                    this.playBgMusic(true);
+                    //----------处理自动播放------------
+                    //--创建页面监听，等待微信端页面加载完毕 触发音频播放
+                    document.addEventListener('DOMContentLoaded', function () {
+                        function audioAutoPlay() {
+                            this.playBgMusic(true);
+                            document.addEventListener("WeixinJSBridgeReady",  ()=> {
+                                this.playBgMusic(true);
+                            }, false);
+                        }
+
+                        audioAutoPlay();
+                    });
+
+                    //--创建触摸监听，当浏览器打开页面时，触摸屏幕触发事件，进行音频播放
+                    function audioAutoPlay() {
+                        this.playBgMusic(true);
+                        document.removeEventListener('touchstart', audioAutoPlay);
+                    }
+
+                    document.addEventListener('touchstart', audioAutoPlay);
+                }
+                //----------处理页面激活------------
+                var hiddenProperty = 'hidden' in document ? 'hidden' :
+                    'webkitHidden' in document ? 'webkitHidden' :
+                        'mozHidden' in document ? 'mozHidden' :
+                            null;
+                var visibilityChangeEvent = hiddenProperty.replace(/hidden/i, 'visibilitychange');
+                var onVisibilityChange = () =>{
+                    if (!document[hiddenProperty]) {
+                        if (!sessionStorage.bgmusic || sessionStorage.bgmusic == 'play') {
+                            this.audiobg.play();
+                        }
+                    } else {
+                        this.audiobg.pause();
+                    }
+                }
+                document.addEventListener(visibilityChangeEvent, onVisibilityChange);
+            },
+            //---------背景音乐开关----------
+            triggerBgMusic() {
+                if (!sessionStorage.bgmusic || sessionStorage.bgmusic == 'play') {
+                    this.playBgMusic(false);
+                } else {
+                    this.playBgMusic(true);
+                }
+            },
+            //---------音乐播放和暂停----------
+            playBgMusic(val) {
+                if (val) {
+                    this.audiobg.play();
+                    this.audiobg.loop;
+                    sessionStorage.bgmusic = 'play';
+                } else {
+                    this.audiobg.pause();
+                    this.audiobg.loop;
+                    sessionStorage.bgmusic = 'pause';
+                }
+            },
             stepNext() {
                 if (this.username) {
                     this.step++;
@@ -184,7 +275,12 @@
             setAnswer(data) {
                 this.answers.push(data);
             },
+            showPop(){
+                this.popShow = true;
+            },
             resultImg() {
+                this.showImg = true;
+                this.shareloading = true;
                 document.getElementById('resulttop').innerText = this.username;
                 document.getElementById('coverbot').style.display = 'block';
                 this.convert2canvas();
@@ -192,12 +288,12 @@
             loadSuccess() {
                 this.isOk = true;
             },
-            popClose(){
+            popClose() {
                 document.getElementById('share-pop').removeChild(document.getElementById('share-pop').firstChild);
-              this.popShow = false;
+                this.popShow = false;
             },
             convert2canvas() {
-                this.popShow  = true;
+
                 var cntElem = document.getElementById('result-cover');
 
                 var shareContent = cntElem;//需要截图的包裹的（原生的）DOM 对象
@@ -217,7 +313,7 @@
                     useCORS: true // 【重要】开启跨域配置
                 };
 
-                html2canvas(shareContent, opts).then( (canvas) =>{
+                html2canvas(shareContent, opts).then((canvas) => {
 
                     var context = canvas.getContext('2d');
                     // 【重要】关闭抗锯齿
@@ -230,14 +326,14 @@
                     var img = Canvas2Image.convertToJPEG(canvas, canvas.width, canvas.height);
 
 
-                    setTimeout(()=> {
+                    setTimeout(() => {
                         this.shareloading = false;
                         document.getElementById('coverbot').style.display = 'none';
                         document.getElementById('share-pop').appendChild(img);
 
                         // img.style.width =  canvas.width / 2 + "px";
                         // img.style.height =  canvas.height / 2 + "px"
-                    },200)
+                    }, 200)
                 });
             }
         },
@@ -246,12 +342,13 @@
 </script>
 
 <style lang="scss">
-    @mixin ani($name,$time,$delay){
-        animation-name:$name;
+    @mixin ani($name,$time,$delay) {
+        animation-name: $name;
         animation-delay: $delay;
-        animation-duration:$time!important;
+        animation-duration: $time !important;
         animation-timing-function: linear;
     }
+
     $psdBaseSize: 750;
     $maxBaseSize: 540;
 
@@ -377,14 +474,14 @@
         width: rpx(701);
         height: rpx(307);
         background: url(../../img/input_wrap.png) no-repeat;
-        background-size:100% 100%;
+        background-size: 100% 100%;
         position: fixed;
         left: 50%;
         top: 70%;
         transform: translate(-50%, -50%);
         box-sizing: border-box;
-        padding-top:rpx(22);
-        @include ani(fadeIn,.2s,1s);
+        padding-top: rpx(22);
+        @include ani(fadeIn, .2s, 1s);
         input {
             display: block;
             width: rpx(651);
@@ -393,104 +490,111 @@
             text-align: center;
             border: 0;
             background: transparent url(../../img/input.png) no-repeat;
-            background-size:100% 100%;
+            background-size: 100% 100%;
             margin: 0 auto;
-            font-size:rpx(45);
+            font-size: rpx(45);
             font-weight: 600;
             color: #000;
             font-family: 'pinghei';
             caret-color: rgba(0, 0, 0, 0.25);
-            &::placeholder{
+            &::placeholder {
                 color: #a2a2a2;
             }
         }
-        a{
+        a {
             display: block;
             width: rpx(650);
             height: rpx(122);
             line-height: rpx(122);
             background: transparent url(../../img/btn.png) no-repeat;
-            background-size:100% 100%;
+            background-size: 100% 100%;
             margin: rpx(16) auto 0;
             color: #000;
             font-size: rpx(38);
             text-align: center;
             font-weight: 600;
         }
-        .hand{
-            right:rpx(10);
-            bottom:rpx(-5)
+        .hand {
+            right: rpx(10);
+            bottom: rpx(-5)
         }
     }
 
     body, html, .wrap, .cont {
         height: 100%;
     }
-    input:focus{
+
+    input:focus {
         outline: 0;
     }
+
     .index {
         width: 100%;
         height: 100%;
         background: #c1c1c1 url(../../img/bg.jpg) no-repeat center 0;
         background-size: 100% 100%;
         position: absolute;
-        top:0;
-        left:0;
+        top: 0;
+        left: 0;
         i.qp {
             display: block;
             position: absolute;
             background-size: 100% 100%;
-            left:50%;
-            top:50%;
+            left: 50%;
+            top: 50%;
             z-index: 10;
             &.qp1 {
                 width: rpx(105);
                 height: rpx(217);
                 background-image: url(../../img/qp1.png);
-                margin-left:rpx(-262);
-                margin-top:rpx(-108);
-                @include ani(fadeIn,.5s,0);
+                margin-left: rpx(-262);
+                margin-top: rpx(-108);
+                @include ani(fadeIn, .5s, 0);
             }
             &.qp2 {
                 width: rpx(108);
                 height: rpx(257);
                 background-image: url(../../img/qp2.png);
-                margin-left:rpx(-332);
-                margin-top:rpx(-328);
-                @include ani(fadeIn,.5s,.2s);
+                margin-left: rpx(-332);
+                margin-top: rpx(-328);
+                @include ani(fadeIn, .5s, .2s);
             }
             &.qp3 {
                 width: rpx(102);
                 height: rpx(233);
                 background-image: url(../../img/qp3.png);
-                margin-left:rpx(232);
-                margin-top:rpx(-288);
-                @include ani(fadeIn,.5s,.4s);
+                margin-left: rpx(232);
+                margin-top: rpx(-288);
+                @include ani(fadeIn, .5s, .4s);
             }
             &.qp4 {
                 width: rpx(94);
                 height: rpx(167);
                 background-image: url(../../img/qp4.png);
-                margin-left:rpx(92);
-                margin-top:rpx(-278);
-                @include ani(fadeIn,.5s,.6s);
+                margin-left: rpx(92);
+                margin-top: rpx(-278);
+                @include ani(fadeIn, .5s, .6s);
             }
         }
 
     }
-    .hand{
+
+    .hand {
         display: block;
         width: rpx(102);
-        height:rpx(119);
+        height: rpx(119);
         background: url(../../img/hand.png) no-repeat;
-        background-size:100% 100%;
+        background-size: 100% 100%;
         position: absolute;
         transition: all .5s;
-        animation: fadeIn .2s 8s linear both,handclick 1s 8.4s infinite linear;
+        animation: fadeIn .2s 8s linear both, handclick 1s 8.4s infinite linear;
         @keyframes handclick {
-            0%,100%{transform: scale(1)}
-            50%{transform: scale(.85)}
+            0%, 100% {
+                transform: scale(1)
+            }
+            50% {
+                transform: scale(.85)
+            }
         }
     }
 
@@ -536,12 +640,13 @@
     p.qa-title {
         width: rpx(667);
         margin: rpx(40) auto 0;
-        padding:0 auto;
+        padding: 0 auto;
         font-size: rpx(28);
         line-height: rpx(36);
         font-weight: 600;
         animation: fadeInUp .5s 4s linear both;
     }
+
     .answer {
         li {
             width: rpx(667);
@@ -555,67 +660,75 @@
             background-size: 100% 100%;
             margin: rpx(20) auto;
             animation: fadeInUp .5s 4.4s linear both;
-            &:first-child{
+            &:first-child {
                 animation: fadeInUp .5s 4.2s linear both;
             }
         }
     }
-    .qa-next{
+
+    .qa-next {
         padding: 0 rpx(25);
     }
-    .title{
+
+    .title {
         width: rpx(472);
         height: rpx(137);
         background: url(../../img/title.png) no-repeat;
-        background-size:100% 100%;
+        background-size: 100% 100%;
         color: #fff;
-        font-size:rpx(36);
+        font-size: rpx(36);
         line-height: rpx(170);
         font-weight: 600;
         box-sizing: border-box;
-        padding-left:rpx(30);
-        margin-top:rpx(47);
+        padding-left: rpx(30);
+        margin-top: rpx(47);
         letter-spacing: rpx(-4);
     }
-    .btn2{
+
+    .btn2 {
         width: rpx(692);
         height: rpx(344);
         background-image: url(../../img/btn2_wrap.jpg);
-        background-size:100% 100%;
+        background-size: 100% 100%;
         margin: 0 auto;
         color: #000;
-        font-size:rpx(28);
+        font-size: rpx(28);
         line-height: rpx(36);
         padding: rpx(34) rpx(44) 0;
         box-sizing: border-box;
         font-weight: 600;
         animation: fadeInUp .5s 1.8s linear both;
         position: relative;
-        i{
+        i {
             display: block;
             width: rpx(173);
             height: rpx(88);
             background-image: url(../../img/btn2.png);
-            background-size:100% 100%;
+            background-size: 100% 100%;
             position: absolute;
-            bottom:rpx(70);
-            left:50%;
-            transform: translate(-50%,0);
+            bottom: rpx(70);
+            left: 50%;
+            transform: translate(-50%, 0);
             animation: btnmove 1s 5s linear infinite;
         }
         @keyframes btnmove {
-            0%,100%{transform: translate(-50%,0);}
-            50%{transform: translate(-46%,0);}
+            0%, 100% {
+                transform: translate(-50%, 0);
+            }
+            50% {
+                transform: translate(-46%, 0);
+            }
         }
     }
-    .ans{
+
+    .ans {
         background-size: 100% 100%;
         margin: rpx(20) auto;
         position: relative;
         overflow: hidden;
-        h3{
+        h3 {
             color: #fff;
-            font-size:rpx(31);
+            font-size: rpx(31);
             font-weight: 600;
             line-height: rpx(45);
             width: 92%;
@@ -623,25 +736,27 @@
             white-space: nowrap;
             letter-spacing: rpx(-2);
         }
-        p{
-                margin-left:rpx(35);
+        p {
+            margin-left: rpx(35);
         }
     }
-    .qa{
+
+    .qa {
         position: fixed;
-        left:50%;
-        top:50%;
-        transform: translate(-50%,-50%);
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
     }
-    .result-top{
+
+    .result-top {
         width: rpx(200);
         height: rpx(117);
         background-image: url(../../img/resultop.png);
-        background-size:100% 100%;
+        background-size: 100% 100%;
         box-sizing: border-box;
-        padding-top:rpx(46);
-        margin-left:rpx(47);
-        p{
+        padding-top: rpx(46);
+        margin-left: rpx(47);
+        p {
             color: #000;
             text-shadow: 0 0 rpx(5) #ffe680;
             font-size: rpx(38);
@@ -655,122 +770,193 @@
             margin: 0 auto;
         }
     }
-    .resultPage{
+
+    .resultPage {
         height: 100%;
         background-image: url(../../img/resultbg.jpg);
-        background-size:100% 100%;
+        background-size: 100% 100%;
         text-align: center;
-        a{
+        a {
             display: inline-block;
             width: rpx(339);
             height: rpx(103);
             background-image: url(../../img/resultbtn.png);
-            background-size:100% 100%;
+            background-size: 100% 100%;
             line-height: rpx(103);
             text-align: center;
             color: #000;
-            font-size:rpx(31);
+            font-size: rpx(31);
             font-weight: 600;
         }
     }
-    .result-bg{
+
+    .result-bg {
         width: rpx(682);
         height: rpx(960);
         background-image: url(../../img/resultbg.png);
-        background-size:100% 100%;
+        background-size: 100% 100%;
         overflow: hidden;
         margin: rpx(-60) auto rpx(30);
-        h3{
+        h3 {
             font-size: rpx(36);
             line-height: rpx(52);
             font-weight: 600;
             color: #000;
-            margin:rpx(95) 0 rpx(90) rpx(82);
+            margin: rpx(95) 0 rpx(90) rpx(82);
             text-align: left;
-            span{
-                font-size:rpx(62);
+            span {
+                font-size: rpx(62);
                 color: #ff5f5f;
                 text-shadow: 0 0 rpx(4) #000;
                 font-weight: 600;
             }
         }
     }
-    .result-intro{
+
+    .result-intro {
         //position: absolute;
-        margin-left:rpx(28)
+        margin-left: rpx(28)
     }
-    @mixin resultbg($width,$height,$bg){
+
+    @mixin resultbg($width,$height,$bg) {
         width: rpx($width);
-        height:rpx($height);
+        height: rpx($height);
         background-image: url($bg);
-        background-size:100% 100%;
+        background-size: 100% 100%;
     }
-    .result1{
-        @include resultbg(513,166,'../../img/result1.png')
+
+    .result1 {
+        @include resultbg(513, 166, '../../img/result1.png')
     }
-    .result2{
-        @include resultbg(562,213,'../../img/result2.png')
+
+    .result2 {
+        @include resultbg(562, 213, '../../img/result2.png')
     }
-    .result3{
-        @include resultbg(564,214,'../../img/result3.png')
+
+    .result3 {
+        @include resultbg(564, 214, '../../img/result3.png')
     }
-    .result4{
-        @include resultbg(589,213,'../../img/result4.png')
+
+    .result4 {
+        @include resultbg(589, 213, '../../img/result4.png')
     }
-    .share-pop{
+
+    .share-pop {
         position: fixed;
-        left:0;
-        top:0;
-        bottom:0;
-        right:0;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
         background: rgba(0, 0, 0, 0.7);
-        img{
+        z-index: 99;
+        img {
             display: block;
             width: 90%;
             position: absolute;
-            left:50%;
-            top:50%;
-            transform: translate(-50%,-50%);
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
         }
-        .vue-loading{
+        .vue-loading {
             position: absolute;
-            left:50%;
-            top:50%;
-            transform: translate(-50%,-50%);
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
             z-index: 99;
         }
     }
-    .reg-wrap{
+
+    .reg-wrap {
         display: none;
-        padding-bottom:rpx(50);
-        .reg{
+        padding-bottom: rpx(50);
+        .reg {
             width: rpx(200);
             display: inline-block;
             text-align: left;
             vertical-align: middle;
         }
-        p{
+        p {
             display: inline-block;
-            width:rpx(393);
-            height:rpx(88);
+            width: rpx(393);
+            height: rpx(88);
             background-image: url(../../img/regintro.png);
-            background-size:100% 100%;
+            background-size: 100% 100%;
             vertical-align: middle;
-            margin-left:rpx(20)
+            margin-left: rpx(20)
         }
     }
-    @media only screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3){
-        // iphonex
-        p.qa-title{
-            margin-top:rpx(50)
+    .music{
+        width: rpx(67);
+        height:rpx(63);
+        background-image: url(../../img/play.png);
+        background-size: 100% 100%;
+        position: fixed;
+        top:rpx(10);
+        right:rpx(10);
+        z-index: 90;
+        animation:musicplay 2s linear infinite;
+        &.pause{
+            animation: musicpause 1s .4s linear forwards;
         }
-        .answer li{
+    }
+    @keyframes musicplay {
+         0%{transform: rotate(0deg) translateZ(0)}
+         100%{transform: rotate(360deg) translateZ(0)}
+    }
+    @keyframes musicpause {
+        0%{transform: scale(1) translateZ(0);}
+        50%{transform: scale(.8) translateZ(0);}
+        100%{transform: scale(1) translateZ(0);background-image: url(../../img/pause.png);}
+    }
+    .share-tip{
+        position: absolute;
+        left:50%;
+        top:50%;
+        transform: translate(-50%,-50%);
+        i{
+            display: block;
+            width:rpx(555);
+            height:rpx(194);
+            background-image: url(../../img/result-tip.png);
+            background-size: 100% 100%;
+        }
+        a{
+            display: block;
+            width:rpx(339);
+            height:rpx(102);
+            line-height: rpx(102);
+            font-size:rpx(31);
+            color: #000;
+            text-align: center;
+            font-weight: 700;
+            background-image: url(../../img/resultbtn2.png);
+            background-size: 100% 100%;
+            margin:rpx(50) auto 0;
+        }
+    }
+    .copyright{
+        position: fixed;
+        width: 100%;
+        text-align: center;
+        color: rgba(0, 0, 0, 0.5);
+        font-size:rpx(12);
+        bottom: rpx(5);
+        left: 0;
+    }
+
+    @media only screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) {
+        // iphonex
+        p.qa-title {
+            margin-top: rpx(50)
+        }
+        .answer li {
             margin: rpx(30) auto;
         }
-        .title{
-            margin-top:0
-        };
-        .ans{
+        .title {
+            margin-top: 0
+        }
+    ;
+        .ans {
             margin: rpx(35) auto;
         }
     }

@@ -102,6 +102,7 @@
                 position: absolute;
                 left: rpx(40);
                 top: rpx(410);
+                transform: translateZ(0);
                 animation: g .5s 1.5s linear forwards;
             }
             .m {
@@ -113,6 +114,7 @@
                 right: rpx(46);
                 bottom: rpx(10);
                 transition: none;
+                transform: translateZ(0);
                 animation: m 0s 3.5s linear forwards;
 
             }
@@ -137,6 +139,7 @@
                 right: rpx(320);
                 bottom: rpx(115);
                 transform-origin: right top;
+                transform: translateZ(0);
                 animation: key 1.5s 0s linear infinite, fadeOut 0s 3.5s linear forwards;
             }
         }
@@ -181,6 +184,7 @@
 
                     font-weight: 600;
                     -webkit-text-stroke: rpx(2) #000;
+                    transform: translateZ(0);
                     animation: fadeInLeft .5s .6s linear both;
                 }
                 &.t2{
@@ -188,6 +192,7 @@
                     font-weight: 600;
                     line-height: rpx(57);
                     text-shadow:0 0 rpx(4) #fff;
+                    transform: translateZ(0);
                     animation: fadeInLeft .5s .8s linear both;
                 }
             }
@@ -213,6 +218,7 @@
                 position: absolute;
                 top:rpx(270);
                 right:rpx(47);
+                transform: translateZ(0);
                 animation: eye 0s .4s linear forwards;
             }
             @keyframes eye {
@@ -251,6 +257,7 @@
                 position: absolute;
                 top:rpx(234);
                 right:rpx(62);
+                transform: translateZ(0);
                 animation: eye2 0s .4s linear forwards;
             }
             @keyframes eye2 {

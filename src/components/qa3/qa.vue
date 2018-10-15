@@ -113,6 +113,7 @@
                 top: rpx(156);
                 left: rpx(16);
                 animation: fadeIn 0.5s 1.8s linear both;
+                transform: translateZ(0);
             }
             .qp2 {
                 width: rpx(166);
@@ -122,6 +123,7 @@
                 top: rpx(370);
                 left: rpx(260);
                 animation: fadeIn 0.5s 2.6s linear both;
+                transform: translateZ(0);
             }
             .m{
                 width: rpx(647);
@@ -131,6 +133,7 @@
                 bottom: rpx(5);
                 right: rpx(5);
                 animation: qa3m 0s 1.2s linear forwards;
+                transform: translateZ(0);
             }
             @keyframes qa3m {
                 0% {
@@ -156,12 +159,14 @@
                     font-weight: 600;
                     -webkit-text-stroke: rpx(2) #000;
                     animation: fadeInLeft .5s .6s linear both;
+                    transform: translateZ(0);
                 }
                 &.t2{
                     color: #000;
                     font-weight: 600;
                     text-shadow:0 0 rpx(4) #fff;
                     animation: fadeInLeft .5s .8s linear both;
+                    transform: translateZ(0);
                 }
             }
         }
@@ -182,6 +187,7 @@
                 right:rpx(83);
                 top:rpx(545);
                 animation: mouth 0s 1s linear forwards;
+                transform: translateZ(0);
             }
             @keyframes mouth {
                 0% {
@@ -244,6 +250,7 @@
                 top:rpx(234);
                 right:rpx(62);
                 animation: eye2 0s .4s linear forwards;
+                transform: translateZ(0);
             }
             @keyframes eye2 {
                 0% {
