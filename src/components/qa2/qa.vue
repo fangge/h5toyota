@@ -22,7 +22,6 @@
                     <h3>该配合你演出的我视而不见……<br>
                         本王要的地中海风格被装得这么乡土风情，你<br>
                         当我是‘你好凯蒂猫’吗？</h3>
-                    <i class="qp3"></i><i class="qp4"></i>
                     <i class="meye2"></i>
                     <i class="geye"></i>
                     <i class="qp3"></i><i class="qp4"></i>
@@ -112,7 +111,7 @@
                 background-size: 100% 100%;
                 top: rpx(425);
                 right: rpx(100);
-                animation: meye 0s .4s linear forwards;
+                animation: meye 0s 1s linear forwards;
             }
             .gmouth {
                 width: rpx(25);
@@ -121,7 +120,7 @@
                 background-size: 100% 100%;
                 top: rpx(575);
                 left: rpx(450);
-                animation: gmouth 0s .8s linear forwards;
+                animation: gmouth 0s 1.6s linear forwards;
             }
             .qp1 {
                 width: rpx(128);
@@ -130,7 +129,7 @@
                 background-size: 100% 100%;
                 top: rpx(130);
                 left: rpx(379);
-                animation: fadeIn 0.5s .6s linear both;
+                animation: fadeIn 0.5s 1.4s linear both;
             }
             .qp2 {
                 width: rpx(312);
@@ -139,7 +138,7 @@
                 background-size: 100% 100%;
                 top: rpx(485);
                 left: rpx(15);
-                animation: fadeIn 0.5s 1.6s linear both;
+                animation: fadeIn 0.5s 2.5s linear both;
             }
             .gbling {
                 width: rpx(21);
@@ -149,7 +148,7 @@
                 top: rpx(533);
                 left: rpx(503);
                 opacity: 0;
-                animation: bounceIn 1s 1.4s infinite forwards;
+                animation: bounceIn 1s 1.6s infinite forwards;
             }
         }
 
@@ -208,7 +207,7 @@
         }
         .ans1 {
             width: rpx(704);
-            height: rpx(653);
+            height: rpx(628);
             background-image: url(../../img/qa2/qa2ans1.jpg);
             background-size:100% 100%;
             i{
@@ -221,8 +220,8 @@
                 background-image: url(../../img/qa2/meye3.png);
                 background-size:100% 100%;
                 right:rpx(138);
-                top:rpx(272);
-                animation: meye2 0s .4s linear forwards;
+                top:rpx(272-25);
+                animation: meye2 0s 1s linear forwards;
             }
             @keyframes meye2 {
                 0% {
@@ -242,9 +241,9 @@
                 background-image: url(../../img/qa2/geye1.png);
                 background-size:100% 100%;
                 right:rpx(305);
-                top:rpx(353);
+                top:rpx(353-25);
 
-                animation: geye 0s .6s linear forwards;
+                animation: geye 0s 1.6s linear forwards;
             }
             @keyframes geye {
                 0% {
@@ -265,7 +264,7 @@
                 background-size: 100% 100%;
                 top: rpx(202);
                 left: rpx(99);
-                animation: fadeIn 0.5s .8s linear both;
+                animation: fadeIn 0.5s 2s linear both;
             }
             .qp4 {
                 width: rpx(125);
@@ -274,7 +273,7 @@
                 background-size: 100% 100%;
                 bottom: rpx(-10);
                 right: rpx(-10);
-                animation: fadeIn 0.5s .9s linear both;
+                animation: fadeIn 0.5s 2.6s linear both;
             }
         }
         .ans2{
@@ -314,7 +313,7 @@
                     width: rpx(194);
                     height: rpx(113);
                     background-image:url(../../img/qa2/eye4.png);
-                    top:rpx(240);
+                    top:rpx(242);
                     right:rpx(62);
                 }
             }
