@@ -77,7 +77,7 @@
                 isOk: false, // 是否显示进度条
                 step: 0,
                 username: '',
-                resultShow: true,
+                resultShow: false,
                 answers: [],
                 score: 0,
                 result_title: '测试显示',
@@ -674,9 +674,9 @@
             background: url(../../img/sbtn.png) no-repeat;
             background-size: 100% 100%;
             margin: rpx(20) auto;
-            animation: fadeInUp .5s 4.2s linear both;
+            animation: fadeInUp .5s .6s linear both;
             &:first-child {
-                animation: fadeInUp .5s 4s linear both;
+                animation: fadeInUp .5s .4s linear both;
             }
         }
     }
