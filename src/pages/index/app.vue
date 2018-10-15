@@ -77,7 +77,7 @@
                 isOk: false, // 是否显示进度条
                 step: 0,
                 username: '',
-                resultShow: false,
+                resultShow: true,
                 answers: [],
                 score: 0,
                 result_title: '测试显示',
@@ -659,7 +659,7 @@
         font-size: rpx(28);
         line-height: rpx(36);
         font-weight: 600;
-        animation: fadeInUp .5s 4s linear both;
+        //animation: fadeInUp .5s 4s linear both;
     }
 
     .answer {
@@ -674,9 +674,9 @@
             background: url(../../img/sbtn.png) no-repeat;
             background-size: 100% 100%;
             margin: rpx(20) auto;
-            animation: fadeInUp .5s 4.4s linear both;
+            animation: fadeInUp .5s 4.2s linear both;
             &:first-child {
-                animation: fadeInUp .5s 4.2s linear both;
+                animation: fadeInUp .5s 4s linear both;
             }
         }
     }
@@ -771,6 +771,8 @@
         box-sizing: border-box;
         padding-top: rpx(46);
         margin-left: rpx(47);
+        z-index: 97;
+        position: relative;
         p {
             color: #000;
             text-shadow: 0 0 rpx(5) #ffe680;
@@ -791,6 +793,7 @@
         background-image: url(../../img/resultbg.jpg);
         background-size: 100% 100%;
         text-align: center;
+        overflow: hidden;
         a {
             display: inline-block;
             width: rpx(339);
@@ -980,6 +983,16 @@
     ;
         .ans {
             margin: rpx(35) auto;
+        }
+    }
+    @media only screen and (max-height:567px){
+        .result-bg{
+            height:rpx(940);
+            margin-top:rpx(-50);
+            margin-bottom:rpx(5)
+        }
+        .result-top{
+            margin-top:rpx(-32)
         }
     }
 
