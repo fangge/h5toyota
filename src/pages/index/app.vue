@@ -52,7 +52,7 @@
                 <a @click.stop="resultImg">生成图片</a>
             </div>
             <div v-else>
-                <vue-loading type="bubbles" color="#ffe67f" :size="{ width: '100px', height: '100px' }" v-if="shareloading"></vue-loading>
+                <p v-if="shareloading" class="loading">加载中</p>
             </div>
             <div id="share-img-box"></div>
             <blockquote v-if="showImg">长按图片保存</blockquote>
@@ -62,7 +62,6 @@
 
 <script>
     import html2canvas from 'html2canvas';
-    import {VueLoading} from 'vue-loading-template'
     import loadbar from '../../components/processbar/progress-bar';
     import qa1 from '../../components/qa1/qa';
     import qa2 from '../../components/qa2/qa';
@@ -71,7 +70,7 @@
 
     export default {
         components: {
-            loadbar, qa1, qa2, qa3, qa4, VueLoading
+            loadbar, qa1, qa2, qa3, qa4
         },
         data() {
             return {
@@ -250,7 +249,8 @@
             resultPage() {
                 this.resultShow = true;
                 let alen = 0;
-                for (let i in this.answers) {
+                var i ;
+                for (i=0;i<=this.answers.length;i++) {
                     if (this.answers[i] === 'A') {
                         alen++;
                     }
@@ -871,7 +871,9 @@
             top: 50%;
             transform: translate(-50%, -50%);
         }
-        .vue-loading {
+        .loading {
+            color: #fff;
+            font-size:rpx(50);
             position: absolute;
             left: 50%;
             top: 50%;

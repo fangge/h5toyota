@@ -183,7 +183,7 @@
                     color: #fff;
 
                     font-weight: 600;
-                    -webkit-text-stroke: rpx(2) #000;
+                    -webkit-text-stroke: rpx(3) #000;
                     transform: translateZ(0);
                     animation: fadeInLeft .5s .6s linear both;
                 }

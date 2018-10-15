@@ -88,7 +88,12 @@ const config = {
       },
       {
         test: /\.js$/,
-        use: 'babel-loader?cacheDirectory',
+        use: {
+          loader:'babel-loader',
+            options: {
+                presets: ['es2015']
+            }
+        },
         exclude: /node_modules/
       },
       {
