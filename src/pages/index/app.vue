@@ -21,9 +21,14 @@
             <div v-if="resultShow" class="resultPage">
                 <div id="result-cover">
                     <div class="result-top"><p id="resulttop">测试结果</p></div>
+                    <i class="result-m result-m1" v-if="score>=0 && score <=25"></i>
+                    <i class="result-m result-m2" v-else-if="score>=26 && score <=50"></i>
+                    <i class="result-m result-m3" v-else-if="score>=51 && score <=75"></i>
+                    <i class="result-m result-m4" v-else></i>
                     <div class="result-bg">
+
                         <h3>你是一个能承受<br><span>{{score}}</span>帕BUG的人</h3>
-                        <img class="result-intro result1" v-if="score>=1 && score <=25" src="../../img/result1.png">
+                        <img class="result-intro result1" v-if="score>=0 && score <=25" src="../../img/result1.png">
                         <img class="result-intro result2" v-else-if="score>=26 && score <=50"  src="../../img/result2.png">
                         <img class="result-intro result3" v-else-if="score>=51 && score <=75"  src="../../img/result3.png">
                         <img class="result-intro result4"  src="../../img/result4.png" v-else>
@@ -712,7 +717,7 @@
         padding: rpx(34) rpx(44) 0;
         box-sizing: border-box;
         font-weight: 600;
-        animation: fadeInUp .5s 1.8s linear both;
+        animation: fadeInUp .2s 1.2s linear both;
         position: relative;
         i {
             display: block;
@@ -810,11 +815,13 @@
 
     .result-bg {
         width: rpx(682);
-        height: rpx(960);
+        height: rpx(950);
         background-image: url(../../img/resultbg.png);
         background-size: 100% 100%;
         overflow: hidden;
         margin: rpx(-60) auto rpx(30);
+        position: relative;
+        z-index: 30;
         h3 {
             font-size: rpx(36);
             line-height: rpx(52);
@@ -828,6 +835,31 @@
                 text-shadow: 0 0 rpx(4) #000;
                 font-weight: 600;
             }
+        }
+    }
+    .result-m{
+        display: block;
+        position: absolute;
+        z-index: 20;
+        background-size:100% 100%;
+        right:rpx(68);
+        top:rpx(70);
+        &.result-m1{
+            width: rpx(230);
+            height: rpx(269);
+            background-image: url(../../img/resultm1.png);
+        }&.result-m2{
+            width: rpx(224);
+            height: rpx(245);
+            background-image: url(../../img/resultm2.png);
+        }&.result-m3{
+            width: rpx(244);
+            height: rpx(239);
+            background-image: url(../../img/resultm3.png);
+        }&.result-m4{
+            width: rpx(257);
+            height: rpx(254);
+            background-image: url(../../img/resultm4.png);
         }
     }
 
@@ -995,5 +1027,6 @@
             margin-top:rpx(-32)
         }
     }
+
 
 </style>
