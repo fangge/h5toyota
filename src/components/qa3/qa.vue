@@ -33,7 +33,7 @@
             <div v-if="answer === 'B'">
                 <h2 class="title  title2">吸尘器只要9.9元包邮买就送四重豪礼</h2>
                 <div class="ans ans2">
-                    <h3>我居然是9.9元吸尘器形状的……钥匙扣！？</h3>
+                    <h3>居然是9.9元吸尘器形状的……钥匙扣！？</h3>
                     <p class="t1">这大概<br>
                         可能也许<br>
                         是我最<span>SKr</span>的<br>

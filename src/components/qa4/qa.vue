@@ -22,8 +22,8 @@
             </div>
             <p class="qa-title">想想看，买车比娶媳妇还激动。我一定要把bug反弹，在买车时满血复活!</p>
             <ul class="answer">
-                <li @click="answerQ('A')">A.‘一诺一生，终身质保’的雷凌双擎</li>
-                <li @click="answerQ('B')">B.XX牌8年质保的混动车</li>
+                <li @click="answerQ('A')">A.‘一诺一生，终生质保’的雷凌双擎</li>
+                <li @click="answerQ('B')">B.XX牌8年质保混动车</li>
             </ul>
         </div>
         <div class="qa-next" v-else>
@@ -37,8 +37,7 @@
 
                 <div @click="nextQa" class="btn2">
                     人生有无数个选择，无数个BUG，<br>
-                    但只要选对了重要的TA，每天都是狂欢节！<br>
-                    看看你究竟hold住了多少BUG？
+                    看看你的选择造就了一个什么样的你？
                     <i></i>
                 </div>
             </div>
@@ -55,8 +54,7 @@
 
                 <div @click="nextQa" class="btn2">
                     人生有无数个选择，无数个BUG，<br>
-                    但只要选对了重要的TA，每天都是狂欢节！<br>
-                    看看你究竟hold住了多少BUG？
+                    看看你的选择造就了一个什么样的你？
                     <i></i>
                 </div>
             </div>

@@ -2,7 +2,7 @@
     <div class="wrap">
         <div :class="'music '+musicplay" @click="musicCheck" v-if="!showImg"></div>
         <audio id="audio" loop>
-            <source src="https://hd.huya.com/entertainWeekly15/bg.mp3" type="audio/mpeg">
+            <source src="https://hd.huya.com/entertainWeekly16/bgm.mp3" type="audio/mpeg">
             Your browser does not support the audio tag.
         </audio>
         <loadbar @loadSuccess="loadSuccess" :isOk="isOk"></loadbar>
@@ -11,7 +11,7 @@
                 <i class="key"></i>
                 <div class="input-wrap animated" v-if="step===0">
                     <input type="text" placeholder="输入你的姓名" v-model="username">
-                    <a @click="stepNext">测测你是几度BUG青年</a>
+                    <a @click="stepNext">开启躲bug人生</a>
                     <i class="hand" id="hand1"></i>
                 </div>
                 <i class="animated qp qp1"></i><i class="animated qp qp2"></i><i class="animated qp qp3"></i><i
