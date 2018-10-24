@@ -11,7 +11,7 @@
                 <i class="key"></i>
                 <div class="input-wrap animated" v-if="step===0">
                     <input type="text" placeholder="输入你的姓名" v-model="username">
-                    <a @click="stepNext">测测你能承受多少Pa</a>
+                    <a @click="stepNext">测测你是几度BUG青年</a>
                     <i class="hand" id="hand1"></i>
                 </div>
                 <i class="animated qp qp1"></i><i class="animated qp qp2"></i><i class="animated qp qp3"></i><i
@@ -82,7 +82,7 @@
                 isOk: false, // 是否显示进度条
                 step: 0,
                 username: '',
-                resultShow: false,
+                resultShow: true,
                 answers: [],
                 score: 0,
                 result_title: '测试显示',
@@ -668,6 +668,7 @@
     }
 
     .answer {
+        overflow: hidden;
         li {
             width: rpx(667);
             height: rpx(96);
@@ -679,9 +680,9 @@
             background: url(../../img/sbtn.png) no-repeat;
             background-size: 100% 100%;
             margin: rpx(20) auto;
-            animation: fadeInUp .5s .6s linear both;
+            animation: fadeInUp .4s 2.4s linear both;
             &:first-child {
-                animation: fadeInUp .5s .4s linear both;
+                animation: fadeInUp .4s 2.2s linear both;
             }
         }
     }
@@ -717,7 +718,7 @@
         padding: rpx(34) rpx(44) 0;
         box-sizing: border-box;
         font-weight: 600;
-        animation: fadeInUp .2s 1.2s linear both;
+        animation: fadeInUp .6s .8s linear both;
         position: relative;
         i {
             display: block;
@@ -766,6 +767,7 @@
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
+        overflow: hidden;
     }
 
     .result-top {

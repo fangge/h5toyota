@@ -10,8 +10,8 @@
             </div>
             <p class="qa-title">飞机延误就是晴空万里中突然暴风雨…坚决阻断了你回家的路。给你一次逃bug的机会，延误险到底buy不buy呢？</p>
             <ul class="answer">
-                <li @click="answerQ('A')">A.Buy啊，万一见鬼了呢？</li>
-                <li @click="answerQ('B')">B.Buy个毛，老子钱多？</li>
+                <li @click.stop="answerQ('A')">A.Buy啊，万一见鬼了呢？</li>
+                <li @click.stop="answerQ('B')">B.Buy个毛，老子钱多？</li>
             </ul>
         </div>
         <div class="qa-next" v-else>
@@ -21,15 +21,12 @@
                 <div class="ans1 ans">
                     <h3>划重点，我的航班取消但不在理赔范围内！<br> 扎心了……</h3>
                     <p class="t1" style="font-family: Arial">W…What?!</p>
-                    <p class="t2">这bug真的让我<br>
-                        虎躯一震<br>
-                        diss保险公司<br>
-                        你这个戏精</p>
+                    <p class="t2">Diss保险公司<br>这个戏精</p>
                     <i class="eye"></i>
                 </div>
 
                 <div @click="nextQa" class="btn2">
-                    就算心态有点崩，也算安全到家了。淡定吃鸡<br>一把，准备带我亲爱的验房去and…<br>准备进入坟墓，oh no~是求婚啦！
+                    就算心态崩塌，也算安全到家。淡定吃鸡一把，<br>准备带亲爱的去验房and顺便求婚啦！
                     <i></i>
                 </div>
             </div>
@@ -38,13 +35,12 @@
                 <div class="ans ans2">
                     <h3>没想到这一延误就是大半天！请完年假还要扣<br>事假工资......心好塞……</h3>
                     <p class="t1">后悔呀！</p>
-                    <p class="t2">这bug成双成对地来，<br>
-                        瞬间成了时间金钱双失青年</p>
+                    <p class="t2">瞬间成了<br>时间金钱双失青年</p>
                     <i class="eye"></i>
                 </div>
 
                 <div @click="nextQa"  class="btn2">
-                    就算心态有点崩，也算安全到家了。淡定吃鸡<br>一把，准备带我亲爱的验房去and…<br>准备进入坟墓，oh no~是求婚啦！
+                    就就算心态崩塌，也算安全到家。淡定吃鸡一把，<br>准备带亲爱的去验房and顺便求婚啦！
                     <i></i>
                 </div>
             </div>
@@ -103,7 +99,7 @@
                 left: rpx(40);
                 top: rpx(410);
                 transform: translateZ(0);
-                animation: g .5s 1.5s linear forwards;
+                animation: g .5-.3s 1.5-.3s linear forwards;
             }
             .m {
                 width: rpx(324);
@@ -115,8 +111,7 @@
                 bottom: rpx(10);
                 transition: none;
                 transform: translateZ(0);
-                animation: m 0s 3.5s linear forwards;
-
+                animation: m 0s 2s linear forwards;
             }
             i {
                 display: block;
@@ -129,7 +124,7 @@
                 background-size: 100% 100%;
                 top: rpx(280);
                 left: rpx(184);
-                @include ani(fadeIn, .5s, 2s);
+                @include ani(fadeIn, .5-.3s, 1.2s);
             }
             .key2 {
                 width: rpx(49);
@@ -140,7 +135,7 @@
                 bottom: rpx(115);
                 transform-origin: right top;
                 transform: translateZ(0);
-                animation: key 1.5s 0s linear infinite, fadeOut 0s 3.5s linear forwards;
+                animation: key 1.5s 0s linear infinite, fadeOut 0s 2s linear forwards;
             }
         }
 
@@ -181,11 +176,11 @@
             p{
                 &.t1{
                     color: #fff;
-
                     font-weight: 600;
                     -webkit-text-stroke: rpx(3) #000;
                     transform: translateZ(0);
                     animation: fadeInLeft .5s .6s linear both;
+                    margin-bottom:rpx(20)
                 }
                 &.t2{
                     color: #000;

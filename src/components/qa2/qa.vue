@@ -19,9 +19,7 @@
             <div v-if="answer === 'A'">
                 <h2 class="title">嫡出正统的才是本王所爱</h2>
                 <div class="ans1 ans">
-                    <h3>该配合你演出的我视而不见……<br>
-                        本王要的地中海风格被装得这么乡土风情，你<br>
-                        当我是‘你好凯蒂猫’吗？</h3>
+                    <h3>本王要的地中海风格被装得这么乡土风，<br>你当我是‘你好凯蒂猫’？</h3>
                     <i class="meye2"></i>
                     <i class="geye"></i>
                     <i class="qp3"></i><i class="qp4"></i>

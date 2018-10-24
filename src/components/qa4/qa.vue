@@ -36,9 +36,9 @@
                 </div>
 
                 <div @click="nextQa" class="btn2">
-                    人生有无数个选择，无数个BUG，但只要选对了
-                    重要的TA，每天都是狂欢节！<br>
-                    那你呢？估计能hold住多少PA的BUG？
+                    人生有无数个选择，无数个BUG，<br>
+                    但只要选对了重要的TA，每天都是狂欢节！<br>
+                    看看你究竟hold住了多少BUG？
                     <i></i>
                 </div>
             </div>
@@ -54,9 +54,9 @@
                 </div>
 
                 <div @click="nextQa" class="btn2">
-                    人生有无数个选择，无数个BUG，但只要选对了
-                    重要的TA，每天都是狂欢节！<br>
-                    那你呢？估计能hold住多少PA的BUG？
+                    人生有无数个选择，无数个BUG，<br>
+                    但只要选对了重要的TA，每天都是狂欢节！<br>
+                    看看你究竟hold住了多少BUG？
                     <i></i>
                 </div>
             </div>
