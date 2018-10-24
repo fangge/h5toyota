@@ -26,7 +26,7 @@
                 </div>
 
                 <div @click="nextQa" class="btn2">
-                    就算心态崩塌，也算安全到家。淡定吃鸡一把，<br>准备带亲爱的去验房and顺便求婚啦！
+                    就算心态崩塌，也算安全到家。<br>淡定吃鸡一把，<br>准备带亲爱的去验房and顺便求婚啦！
                     <i></i>
                 </div>
             </div>
@@ -40,7 +40,7 @@
                 </div>
 
                 <div @click="nextQa"  class="btn2">
-                    就就算心态崩塌，也算安全到家。淡定吃鸡一把，<br>准备带亲爱的去验房and顺便求婚啦！
+                    就就算心态崩塌，也算安全到家。<br>淡定吃鸡一把，<br>准备带亲爱的去验房and顺便求婚啦！
                     <i></i>
                 </div>
             </div>
@@ -124,7 +124,7 @@
                 background-size: 100% 100%;
                 top: rpx(280);
                 left: rpx(184);
-                @include ani(fadeIn, .5-.3s, 1.2s);
+                @include ani(fadeIn, .5-.3s, 1.7s);
             }
             .key2 {
                 width: rpx(49);
@@ -201,7 +201,8 @@
                     font-size:rpx(68);
                 }
                 &.t2{
-                    font-size:rpx(52);
+                    font-size:rpx(60);
+                    line-height: 1.3;
                 }
             }
             .eye{

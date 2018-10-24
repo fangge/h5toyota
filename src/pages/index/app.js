@@ -4,9 +4,9 @@ import App from './app.vue'
 import wxApi from '../../assets/wxapi';
 import '../../assets/font/zt.css';
 import '../../assets/animate.css';
-import Es6Promise from 'es6-promise'
-import 'babel-polyfill';
-Es6Promise.polyfill();
+// import Es6Promise from 'es6-promise'
+// import 'babel-polyfill';
+// Es6Promise.polyfill();
 
 wxApi.shareToPYQ.opts = wxApi.sendToPY.opts = {
     img_url:'http://img.gd.sohu.com/norefer/toyota/20181017/0.jpg',

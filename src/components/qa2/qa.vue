@@ -215,6 +215,10 @@
             height: rpx(628);
             background-image: url(../../img/qa2/qa2ans1.jpg);
             background-size:100% 100%;
+            h3{
+                font-size: rpx(34);
+                line-height: 1.8;
+            }
             i{
                 display: block;
                 position: absolute;

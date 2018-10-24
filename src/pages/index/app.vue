@@ -21,14 +21,16 @@
             <div v-if="resultShow" class="resultPage">
                 <div id="result-cover">
                     <div class="result-top"><p id="resulttop">测试结果</p></div>
-                    <i class="result-m result-m1" v-if="score>=0 && score <=25"></i>
+                    <i class="result-m result-m0" v-if="score=0"></i>
+                    <i class="result-m result-m1" v-else-if="score>0 && score <=25"></i>
                     <i class="result-m result-m2" v-else-if="score>=26 && score <=50"></i>
                     <i class="result-m result-m3" v-else-if="score>=51 && score <=75"></i>
                     <i class="result-m result-m4" v-else></i>
                     <div class="result-bg">
 
-                        <h3>你是一个能承受<br><span>{{score}}</span>帕BUG的人</h3>
-                        <img class="result-intro result1" v-if="score>=0 && score <=25" src="../../img/result1.png">
+                        <h3>{{scoreTitle}}</h3>
+                        <img class="result-intro result1" v-if="score=0" src="../../img/result0.png">
+                        <img class="result-intro result1" v-else-if="score>0 && score <=25" src="../../img/result1.png">
                         <img class="result-intro result2" v-else-if="score>=26 && score <=50"  src="../../img/result2.png">
                         <img class="result-intro result3" v-else-if="score>=51 && score <=75"  src="../../img/result3.png">
                         <img class="result-intro result4"  src="../../img/result4.png" v-else>
@@ -82,9 +84,10 @@
                 isOk: false, // 是否显示进度条
                 step: 0,
                 username: '',
-                resultShow: true,
+                resultShow: false,
                 answers: [],
                 score: 0,
+                scoreTitle:'BUG王者',
                 result_title: '测试显示',
                 popShow: false,
                 shareloading: false,
@@ -260,14 +263,21 @@
                         alen++;
                     }
                 }
-                if (alen === 1 || alen === 0) {
-                    this.score = this.randomNum(1, 25)
+                if(alen === 0){
+                    this.score = 0;
+                    this.scoreTitle='BUG王者'
+            } else if (alen === 1) {
+                    this.score = this.randomNum(1, 25);
+                    this.scoreTitle='差不多青年'
                 } else if (alen === 2) {
-                    this.score = this.randomNum(26, 50)
+                    this.score = this.randomNum(26, 50);
+                    this.scoreTitle='2B青年'
                 } else if (alen === 3) {
-                    this.score = this.randomNum(51, 75)
+                    this.score = this.randomNum(51, 75);
+                    this.scoreTitle='三道杠青年'
                 } else if (alen === 4) {
-                    this.score = this.randomNum(76, 100)
+                    this.score = this.randomNum(76, 100);
+                    this.scoreTitle='靠谱青年'
                 }
             },
             randomNum(minNum, maxNum) {
@@ -569,7 +579,7 @@
                 background-image: url(../../img/qp1.png);
                 margin-left: rpx(-262);
                 margin-top: rpx(-108);
-                @include ani(fadeIn, .5s, 0);
+                @include ani(fadeIn, .5s, 0s);
             }
             &.qp2 {
                 width: rpx(108);
@@ -660,7 +670,6 @@
     p.qa-title {
         width: rpx(667);
         margin: rpx(40) auto 0;
-        padding: 0 auto;
         font-size: rpx(28);
         line-height: rpx(36);
         font-weight: 600;
