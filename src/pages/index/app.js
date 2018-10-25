@@ -12,7 +12,7 @@ wxApi.shareToPYQ.opts = wxApi.sendToPY.opts = {
     img_url:'http://img.gd.sohu.com/norefer/toyota/20181017/0.jpg',
     link:location.href,
     title:'人生无处不是bug',
-    desc:'快来测测你能承受多少Pa!'
+    desc:'快来开启你的躲bug人生'
 }
 window.Canvas2Image = function () {
 

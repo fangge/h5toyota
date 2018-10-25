@@ -21,7 +21,7 @@
             <div v-if="resultShow" class="resultPage">
                 <div id="result-cover">
                     <div class="result-top"><p id="resulttop">测试结果</p></div>
-                    <i class="result-m result-m0" v-if="score=0"></i>
+                    <i class="result-m result-m0" v-if="score==0"></i>
                     <i class="result-m result-m1" v-else-if="score>0 && score <=25"></i>
                     <i class="result-m result-m2" v-else-if="score>=26 && score <=50"></i>
                     <i class="result-m result-m3" v-else-if="score>=51 && score <=75"></i>
@@ -29,7 +29,7 @@
                     <div class="result-bg">
 
                         <h3>{{scoreTitle}}</h3>
-                        <img class="result-intro result1" v-if="score=0" src="../../img/result0.png">
+                        <img class="result-intro result0" v-if="score==0" src="../../img/result0.png">
                         <img class="result-intro result1" v-else-if="score>0 && score <=25" src="../../img/result1.png">
                         <img class="result-intro result2" v-else-if="score>=26 && score <=50"  src="../../img/result2.png">
                         <img class="result-intro result3" v-else-if="score>=51 && score <=75"  src="../../img/result3.png">
@@ -82,7 +82,7 @@
         data() {
             return {
                 isOk: false, // 是否显示进度条
-                step: 0,
+                step: 1,
                 username: '',
                 resultShow: false,
                 answers: [],
@@ -825,21 +825,23 @@
     }
 
     .result-bg {
-        width: rpx(682);
-        height: rpx(950);
+        width: rpx(696);
+        height: rpx(719);
         background-image: url(../../img/resultbg.png);
         background-size: 100% 100%;
         overflow: hidden;
-        margin: rpx(-60) auto rpx(30);
+        margin: rpx(-20) auto rpx(30);
         position: relative;
         z-index: 30;
         h3 {
-            font-size: rpx(36);
-            line-height: rpx(52);
+            font-size: rpx(58);
+            line-height: rpx(120);
             font-weight: 600;
             color: #000;
-            margin: rpx(95) 0 rpx(90) rpx(82);
-            text-align: left;
+            width: 100%;
+            text-align: center;
+            margin-bottom:rpx(45);
+
             span {
                 font-size: rpx(62);
                 color: #ff5f5f;
@@ -850,33 +852,39 @@
     }
     .result-m{
         display: block;
-        position: absolute;
+        /*position: absolute;*/
         z-index: 20;
         background-size:100% 100%;
-        right:rpx(68);
-        top:rpx(70);
+        margin: 0 auto;
+        /*right:rpx(68);*/
+        /*top:rpx(70);*/
+        &.result-m0{
+            width: rpx(313);
+            height: rpx(276);
+            background-image: url(../../img/resultm0.png);
+        }
         &.result-m1{
-            width: rpx(230);
-            height: rpx(269);
+            width: rpx(317);
+            height: rpx(290);
             background-image: url(../../img/resultm1.png);
         }&.result-m2{
-            width: rpx(224);
-            height: rpx(245);
+            width: rpx(237);
+            height: rpx(275);
             background-image: url(../../img/resultm2.png);
         }&.result-m3{
-            width: rpx(244);
-            height: rpx(239);
+            width: rpx(232);
+            height: rpx(290);
             background-image: url(../../img/resultm3.png);
         }&.result-m4{
-            width: rpx(257);
-            height: rpx(254);
+            width: rpx(307);
+            height: rpx(296);
             background-image: url(../../img/resultm4.png);
         }
     }
 
     .result-intro {
         //position: absolute;
-        margin-left: rpx(28)
+        margin: 0 auto
     }
 
     @mixin resultbg($width,$height) {
@@ -885,20 +893,23 @@
         height: rpx($height);
     }
 
+    .result0 {
+        @include resultbg(557, 144)
+    }
     .result1 {
-        @include resultbg(513, 166)
+        @include resultbg(582, 104)
     }
 
     .result2 {
-        @include resultbg(562, 213)
+        @include resultbg(556, 104)
     }
 
     .result3 {
-        @include resultbg(564, 214)
+        @include resultbg(563, 104)
     }
 
     .result4 {
-        @include resultbg(589, 213)
+        @include resultbg(583, 104)
     }
 
     .share-pop {
