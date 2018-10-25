@@ -169,7 +169,19 @@
                 'img/qa3ans1.jpg',
                 'img/qa3bg.jpg',
                 'img/qa4ans2.jpg',
-                'img/qa4bg.jpg'
+                'img/qa4bg.jpg',
+                'img/qa4s1.jpg',
+                'img/qa4s2.png',
+                'img/qp3.png',
+                'img/resultbg.png',
+                'img/resultbtn.png',
+                'img/resultbtn2.png',
+                'img/resultm0.png',
+                'img/resultm1.png',
+                'img/resultm2.png',
+                'img/resultm3.png',
+                'img/resultm4.png',
+                'img/sbtn.png',
             ]);
             this.musicInit();
         },
