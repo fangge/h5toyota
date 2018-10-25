@@ -37,7 +37,7 @@
                     <p class="t1">这大概<br>
                         可能也许<br>
                         是我最<span>SKr</span>的<br>
-                        一次网上购物吧。</p>
+                        一次网上购物吧</p>
                     <i class="eye"></i>
                 </div>
 
@@ -110,7 +110,7 @@
                 background-size: 100% 100%;
                 top: rpx(156);
                 left: rpx(16);
-                animation: fadeIn 0.5s 1.8s linear both;
+                animation: fadeIn 0.5s 1.8-.4s linear both;
                 transform: translateZ(0);
             }
             .qp2 {
@@ -120,7 +120,7 @@
                 background-size: 100% 100%;
                 top: rpx(370);
                 left: rpx(260);
-                animation: fadeIn 0.5s 2.6s linear both;
+                animation: fadeIn 0.5s 2.6-.4s linear both;
                 transform: translateZ(0);
             }
             .m{
@@ -130,7 +130,7 @@
                 background-size: 100% 100%;
                 bottom: rpx(5);
                 right: rpx(10);
-                animation: qa3m 0s 1.2s linear forwards;
+                animation: qa3m 0s 1.2-.4s linear forwards;
                 transform: translateZ(0);
             }
             @keyframes qa3m {

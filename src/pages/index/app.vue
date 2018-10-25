@@ -21,6 +21,11 @@
             <div v-if="resultShow" class="resultPage">
                 <div id="result-cover">
                     <div class="result-top"><p id="resulttop">测试结果</p></div>
+                    <ul class="star-list">
+                        <li v-for="(item,index) in 4">
+                            <i class="star-hov" v-if="index<alen"></i>
+                        </li>
+                    </ul>
                     <i class="result-m result-m0" v-if="score==0"></i>
                     <i class="result-m result-m1" v-else-if="score>0 && score <=25"></i>
                     <i class="result-m result-m2" v-else-if="score>=26 && score <=50"></i>
@@ -82,7 +87,7 @@
         data() {
             return {
                 isOk: false, // 是否显示进度条
-                step: 1,
+                step: 0,
                 username: '',
                 resultShow: false,
                 answers: [],
@@ -93,7 +98,8 @@
                 shareloading: false,
                 audiobg:null,
                 musicplay:'',
-                showImg:false
+                showImg:false,
+                alen:0
             }
         },
         mounted() {
@@ -256,26 +262,26 @@
             },
             resultPage() {
                 this.resultShow = true;
-                let alen = 0;
+
                 var i ;
                 for (i=0;i<=this.answers.length;i++) {
                     if (this.answers[i] === 'A') {
-                        alen++;
+                        this.alen++;
                     }
                 }
-                if(alen === 0){
+                if(this.alen === 0){
                     this.score = 0;
                     this.scoreTitle='BUG王者'
-            } else if (alen === 1) {
+            } else if (this.alen === 1) {
                     this.score = this.randomNum(1, 25);
                     this.scoreTitle='差不多青年'
-                } else if (alen === 2) {
+                } else if (this.alen === 2) {
                     this.score = this.randomNum(26, 50);
                     this.scoreTitle='2B青年'
-                } else if (alen === 3) {
+                } else if (this.alen === 3) {
                     this.score = this.randomNum(51, 75);
                     this.scoreTitle='三道杠青年'
-                } else if (alen === 4) {
+                } else if (this.alen === 4) {
                     this.score = this.randomNum(76, 100);
                     this.scoreTitle='靠谱青年'
                 }
@@ -830,7 +836,7 @@
         background-image: url(../../img/resultbg.png);
         background-size: 100% 100%;
         overflow: hidden;
-        margin: rpx(-20) auto rpx(30);
+        margin: rpx(-30) auto rpx(15);
         position: relative;
         z-index: 30;
         h3 {
@@ -942,7 +948,7 @@
             color: #fff;
             position: absolute;
             left:50%;
-            bottom:rpx(50);
+            bottom:rpx(20);
             transform: translate(-50%,0);
         }
     }
@@ -1023,6 +1029,25 @@
         left: 0;
     }
 
+    .star-list{
+        position: absolute;
+        top:rpx(38);
+        left:rpx(260);
+        li{
+            display: inline-block;
+            width: rpx(68);
+            height:rpx(63);
+            background-image: url(../../img/star.png);
+            background-size: 100% 100%;
+            i{
+                display: inline-block;
+                width: rpx(68);
+                height:rpx(63);
+                background-image: url(../../img/starhov.png);
+                background-size: 100% 100%;
+            }
+        }
+    }
     @media only screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) {
         // iphonex
         p.qa-title {
@@ -1041,12 +1066,14 @@
     }
     @media only screen and (max-height:567px){
         .result-bg{
-            height:rpx(940);
-            margin-top:rpx(-50);
+            margin-top:rpx(-80);
             margin-bottom:rpx(5)
         }
         .result-top{
             margin-top:rpx(-32)
+        }
+        .star-list{
+            top:rpx(10)
         }
     }
 

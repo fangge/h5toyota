@@ -99,7 +99,7 @@
                 left: rpx(40);
                 top: rpx(410);
                 transform: translateZ(0);
-                animation: g .5-.3s 1.5-.3s linear forwards;
+                animation: g .5-.3s 1.5-.4s linear forwards;
             }
             .m {
                 width: rpx(324);
@@ -111,7 +111,7 @@
                 bottom: rpx(10);
                 transition: none;
                 transform: translateZ(0);
-                animation: m 0s 2s linear forwards;
+                animation: m 0s 2-.2s linear forwards;
             }
             i {
                 display: block;
@@ -124,7 +124,7 @@
                 background-size: 100% 100%;
                 top: rpx(280);
                 left: rpx(184);
-                @include ani(fadeIn, .5-.3s, 1.7s);
+                @include ani(fadeIn, .5-.4s, 1.7s);
             }
             .key2 {
                 width: rpx(49);
@@ -135,7 +135,7 @@
                 bottom: rpx(115);
                 transform-origin: right top;
                 transform: translateZ(0);
-                animation: key 1.5s 0s linear infinite, fadeOut 0s 2s linear forwards;
+                animation: key 1.5s 0s linear infinite, fadeOut 0s 2-.2s linear forwards;
             }
         }
 

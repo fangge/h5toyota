@@ -90,6 +90,9 @@
     }
 
     .qa2 {
+        .btn2:first-child{
+            animation-delay: 2.8s;
+        }
         .ani-wrap {
             width: rpx(702);
             height: rpx(771);
@@ -109,7 +112,7 @@
                 background-size: 100% 100%;
                 top: rpx(425);
                 right: rpx(100);
-                animation: meye 0s 1s linear forwards;
+                animation: meye 0s .3s linear forwards;
                 transform: translateZ(0);
             }
             .gmouth {
@@ -119,7 +122,7 @@
                 background-size: 100% 100%;
                 top: rpx(575);
                 left: rpx(450);
-                animation: gmouth 0s 1.6s linear forwards;
+                animation: gmouth 0s 1.6-.7s linear forwards;
                 transform: translateZ(0);
             }
             .qp1 {
@@ -129,7 +132,7 @@
                 background-size: 100% 100%;
                 top: rpx(130);
                 left: rpx(379);
-                animation: fadeIn 0.5s 1.4s linear both;
+                animation: fadeIn 0.5s 1.4-.7s linear both;
                 transform: translateZ(0);
             }
             .qp2 {
@@ -139,7 +142,7 @@
                 background-size: 100% 100%;
                 top: rpx(485);
                 left: rpx(15);
-                animation: fadeIn 0.5s 2.5s linear both;
+                animation: fadeIn 0.5s 2.5-.7s linear both;
                 transform: translateZ(0);
             }
             .gbling {
