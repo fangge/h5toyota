@@ -805,6 +805,7 @@
         box-sizing: border-box;
         padding-top: rpx(46);
         margin-left: rpx(47);
+        margin-top:rpx(-18);
         z-index: 97;
         position: relative;
         p {
@@ -1043,7 +1044,7 @@
 
     .star-list{
         position: absolute;
-        top:rpx(38);
+        top:rpx(25);
         left:rpx(260);
         li{
             display: inline-block;
